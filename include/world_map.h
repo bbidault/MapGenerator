@@ -56,12 +56,6 @@ class world_map
         void randomize_sources();
 
         ///
-        void river( int i, int j );
-
-        ///
-        void lake( int i, int j );
-
-        ///
         void color_topography();
 
 
@@ -96,7 +90,4 @@ class world_map
 
         ///
         void find_max();
-
-        ///
-        void visit_lake( int i, int j, std::vector <pixel_coordinates> lake );
 };
