@@ -12,7 +12,7 @@ bool between( double x, double a, double b )
     }
 }
 
-int sign( int a )
+int abs( int a )
 {
     if( a >= 0 )
     {

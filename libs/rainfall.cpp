@@ -3,7 +3,6 @@
 #include "ctime"
 
 
-///
 void world_map::create_rainfall()
 {
     for( int i = 0 ; i < width ; i++ )
@@ -17,7 +16,7 @@ void world_map::create_rainfall()
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - sign( ( j*width*6 )/( 5*height ) - width/5 );
+                        int max = width/5 - abs( ( j*width*6 )/( 5*height ) - width/5 );
 
                         if( ( i + l ) < ( width - 1 ) )
                         {
@@ -41,7 +40,7 @@ void world_map::create_rainfall()
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - sign( ( ( j - height/3 )*width*6 )/( 5*height ) - width/5 );
+                        int max = width/5 - abs( ( ( j - height/3 )*width*6 )/( 5*height ) - width/5 );
 
                         if( ( i - l ) > 0 )
                         {
@@ -65,7 +64,7 @@ void world_map::create_rainfall()
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - sign( ( ( j - height*2/3 )*width*6 )/( 5*height ) - width/5 );
+                        int max = width/5 - abs( ( ( j - height*2/3 )*width*6 )/( 5*height ) - width/5 );
 
                         if( ( i + l ) < ( width - 1 ) )
                         {
@@ -94,7 +93,6 @@ void world_map::create_rainfall()
     }
 }
 
-///
 void world_map::average_rainfall()
 {
     for( int i = 1 ; i < width - 1 ; i++ )
@@ -118,7 +116,6 @@ void world_map::average_rainfall()
     }
 }
 
-///
 void world_map::color_rainfall()
 {
     for( int i = 0 ; i < width ; i++ )

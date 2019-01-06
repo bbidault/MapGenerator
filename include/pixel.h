@@ -1,9 +1,10 @@
 #include "stdio.h"
 #include "opencv2/opencv.hpp"
 
+
+/// list of pixel states
 enum pixel_state
 {
-
     NOTHING = 0,
     SOURCE,
     RIVER,
@@ -13,6 +14,7 @@ enum pixel_state
     RAILWAY,
 };
 
+/// pixel class definition : one element of the global map
 class pixel
 {
     public:
@@ -22,9 +24,9 @@ class pixel
         double altitude;
         double temperature;
         double rainfall;
-        bool visited;
         pixel_state state;
 
+        /// constructor
         pixel()
         {
             topography_color[0] = 0;
@@ -39,7 +41,6 @@ class pixel
             altitude = -2000;
             temperature = 0;
             rainfall = 0;
-            visited = false;
             state = NOTHING;
         }
 };

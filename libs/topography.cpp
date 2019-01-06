@@ -3,7 +3,6 @@
 #include "ctime"
 
 
-///
 void world_map::create_topography()
 {
     this->randomize_altitude( 1800 );
@@ -28,7 +27,6 @@ void world_map::create_topography()
     this->average_altitude();
 }
 
-///
 void world_map::randomize_altitude( int prob )
 {
     srand(time(NULL));
@@ -48,7 +46,6 @@ void world_map::randomize_altitude( int prob )
     }
 }
 
-///
 void world_map::dilation()
 {
     pixel **world_copy = new pixel*[width];
@@ -137,7 +134,6 @@ void world_map::erosion()
     world = world_copy;
 }
 
-///
 void world_map::average_altitude()
 {
     for( int i = 1 ; i < width - 1 ; i++ )
@@ -161,7 +157,6 @@ void world_map::average_altitude()
     }
 }
 
-///
 void world_map::create_irregularities( int prob, int size )
 {
     srand(time(NULL));
@@ -182,7 +177,6 @@ void world_map::create_irregularities( int prob, int size )
     }
 }
 
-///
 void world_map::randomize_sources()
 {
     srand(time(NULL));
@@ -207,7 +201,6 @@ void world_map::randomize_sources()
     }
 }
 
-///
 void world_map::color_topography()
 {
     for( int i = 1 ; i < width - 1 ; i++ )

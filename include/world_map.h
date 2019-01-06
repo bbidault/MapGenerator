@@ -1,11 +1,7 @@
 #include "pixel.h"
 
-struct pixel_coordinates
-{
-    int row;
-    int col;
-};
 
+/// world_map class definition : array of pixels
 class world_map
 {
     private:
@@ -14,6 +10,7 @@ class world_map
         pixel **world;
 
     public:
+        /// constructor
         world_map()
         {
             height = 600;
@@ -26,6 +23,7 @@ class world_map
             }
         }
 
+        /// destructor
         ~world_map()
         {
             delete [] world;
@@ -34,60 +32,67 @@ class world_map
 
         /** Topographic map functions **/
 
-        ///
+        /// main topography function
         void create_topography();
 
-        ///
+        /** generates random high points on the map
+         * 
+         * @param probability of altitude > 0
+         */
         void randomize_altitude( int prob );
 
-        ///
+        /// dilate points of altitude > 0
         void dilation();
 
-        ///
+        /// erode points of altitude > 0
         void erosion();
 
-        ///
+        /// average altitude across the map
         void average_altitude();
 
-        ///
+        /** create random altutude irregularities
+         * 
+         * @param probability of irregularity
+         * @param size of irregularity
+         */
         void create_irregularities( int prob, int size );
 
-        ///
+        /// generate random sources in locations of high raifall
         void randomize_sources();
 
-        ///
+        /// color topographic map
         void color_topography();
 
 
         /** Heat map functions **/
 
-        ///
+        /// generate heatmap from longitude and altitude
         void create_heat();
 
-        ///
+        /// average temperature across the map
         void average_temperature();
 
-        ///
+        /// color heatmap
         void color_heat();
 
 
         /** Rainfall map functions **/
 
-        ///
+        /// generate rainfall map from water mass locations and air currents
         void create_rainfall();
 
-        ///
+        /// average rainfall across the map
         void average_rainfall();
 
-        ///
+        /// color rainfall map
         void color_rainfall();
 
 
         /** other functions **/
 
-        ///
+        /// display topographic, heat and rainfall maps
         void display_map();
 
-        ///
+        /// display max max altitude, max and min temperature and max rainfall
         void find_max();
 };

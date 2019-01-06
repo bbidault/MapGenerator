@@ -3,14 +3,13 @@
 #include "ctime"
 
 
-///
 void world_map::create_heat()
 {
     for( int i = 0 ; i < width ; i++ )
     {
         for( int j = 0 ; j < height ; j++ )
         {
-            world[i][j].temperature += 30 - ( sign( 60 - j*120/height ) );
+            world[i][j].temperature += 30 - ( abs( 60 - j*120/height ) );
 
             if( world[i][j].altitude >= 0 )
             {
@@ -29,7 +28,6 @@ void world_map::create_heat()
     }
 }
 
-///
 void world_map::average_temperature()
 {
     for( int i = 1 ; i < width - 1 ; i++ )
@@ -53,7 +51,6 @@ void world_map::average_temperature()
     }
 }
 
-///
 void world_map::color_heat()
 {
     for( int i = 0 ; i < width ; i++ )

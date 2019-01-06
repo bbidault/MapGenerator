@@ -2,7 +2,6 @@
 #include "common.h"
 
 
-///
 void world_map::display_map( )
 {
     cv::Mat topographic_map( height, width, CV_8UC3 );
@@ -30,7 +29,6 @@ void world_map::display_map( )
     imshow("Rainfall Map", rainfall_map);
 }
 
-///
 void world_map::find_max()
 {
     double max_altitude = 0;
