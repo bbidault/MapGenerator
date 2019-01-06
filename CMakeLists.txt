@@ -9,10 +9,10 @@ find_package( OpenCV REQUIRED )
 add_executable( MapGenerator 
                 include/world_map.h 
                 include/pixel.h
-                include/common.h
                 src/main.cpp 
                 src/world_map.cpp
-                src/common.cpp
+                libs/common.h
+                libs/common.cpp
                 libs/topography.cpp
                 libs/heat.cpp
                 libs/rainfall.cpp )

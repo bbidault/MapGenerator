@@ -1,6 +1,5 @@
 #include "world_map.h"
 #include "common.h"
-#include "ctime"
 
 
 ///
