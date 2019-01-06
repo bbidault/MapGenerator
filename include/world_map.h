@@ -33,7 +33,7 @@ class world_map
 
 
         /** Topographic map functions **/
-        
+
         ///
         void create_topography();
 

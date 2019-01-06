@@ -12,7 +12,10 @@ add_executable( MapGenerator
                 include/common.h
                 src/main.cpp 
                 src/world_map.cpp
-                src/common.cpp )
+                src/common.cpp
+                libs/topography.cpp
+                libs/heat.cpp
+                libs/rainfall.cpp )
 
 target_link_libraries( MapGenerator 
                        ${OpenCV_LIBS} )
@@ -20,4 +23,5 @@ target_link_libraries( MapGenerator
 target_include_directories( MapGenerator 
                             PRIVATE 
                             include
-                            src )
+                            src
+                            libs )
