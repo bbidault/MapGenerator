@@ -60,6 +60,20 @@ class world_map
         /// generate sources in locations of high raifall
         void create_sources();
 
+        /** generate a river from source
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void generate_river( int i, int j );
+
+        /** generate a lake from a river
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void generate_lake( int i, int j );
+
         /// color topographic map
         void color_topography();
 

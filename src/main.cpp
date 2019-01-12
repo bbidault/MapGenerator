@@ -10,7 +10,7 @@ int main(int argc, char** argv )
 
     world.create_rainfall();
 
-    //world.create_sources();
+    world.create_sources();
 
     world.color_topography();
     
