@@ -9,8 +9,10 @@ void world_map::create_rainfall()
     {
         for( int j = 0 ; j < height ; j++ )
         {
+            /// clouds form at see
             if( world[i][j].altitude < 0 )
             {
+                /// if north to the northern horse latitude
                 if( j < height/3 )
                 { 
                     for( int k = 0 ; k < 18 ; k++ )
@@ -35,6 +37,7 @@ void world_map::create_rainfall()
                         }
                     }
                 }
+                /// if between horse latitudes 
                 else if( between( j, height/3, height*2/3 ) )
                 {
                     for( int k = 0 ; k < 18 ; k++ )
@@ -59,6 +62,7 @@ void world_map::create_rainfall()
                         }
                     }
                 }
+                /// if south of southern horse latitude
                 else
                 {
                     for( int k = 0 ; k < 18 ; k++ )

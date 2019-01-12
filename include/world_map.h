@@ -57,8 +57,8 @@ class world_map
          */
         void create_irregularities( int prob, int size );
 
-        /// generate random sources in locations of high raifall
-        void randomize_sources();
+        /// generate sources in locations of high raifall
+        void create_sources();
 
         /// color topographic map
         void color_topography();

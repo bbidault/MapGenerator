@@ -9,8 +9,10 @@ void world_map::create_heat()
     {
         for( int j = 0 ; j < height ; j++ )
         {
+            /// the temperature is affected by the latitude
             world[i][j].temperature += 30 - ( abs( 60 - j*120/height ) );
 
+            /// the temperature is effected by the altitude and depth
             if( world[i][j].altitude >= 0 )
             {
                 world[i][j].temperature += 30 - world[i][j].altitude*6/400;

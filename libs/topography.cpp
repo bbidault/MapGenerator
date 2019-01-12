@@ -177,7 +177,7 @@ void world_map::create_irregularities( int prob, int size )
     }
 }
 
-void world_map::randomize_sources()
+void world_map::create_sources()
 {
     srand(time(NULL));
 
