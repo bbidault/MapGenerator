@@ -2,10 +2,18 @@
 #include "opencv2/opencv.hpp"
 
 
+/// coordinates of a certain pixel
+struct pixel_coordinates
+{
+    int row;
+    int col;
+};
+
 /// list of pixel states
 enum pixel_state
 {
     NOTHING = 0,
+    SEA,
     SOURCE,
     RIVER,
     LAKE,
@@ -25,6 +33,8 @@ class pixel
         double temperature;
         double rainfall;
         pixel_state state;
+        bool pixel_visited;
+        bool sea_connected;
 
         /// constructor
         pixel()
@@ -42,5 +52,7 @@ class pixel
             temperature = 0;
             rainfall = 0;
             state = NOTHING;
+            pixel_visited = false;
+            sea_connected = false;
         }
 };

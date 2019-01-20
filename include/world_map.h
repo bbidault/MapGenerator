@@ -57,7 +57,13 @@ class world_map
          */
         void create_irregularities( int prob, int size );
 
-        /// generate sources in locations of high raifall
+        /// color topographic map
+        void color_topography();
+
+
+        /** Fresh water functions **/
+
+        /// generate sources in locations of high rainfall
         void create_sources();
 
         /** generate a river from source
@@ -67,6 +73,13 @@ class world_map
          */
         void generate_river( int i, int j );
 
+        /** update rivers and lakes connection status
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void set_connection( int i, int j );
+
         /** generate a lake from a river
          * 
          * @param latitude of the source
@@ -74,8 +87,13 @@ class world_map
          */
         void generate_lake( int i, int j );
 
-        /// color topographic map
-        void color_topography();
+        /** create a vector listing all the pixels of a lake
+         * 
+         * @param latitude of the lake
+         * @param longitude of the lake 
+         * @param total lake
+         */
+        void visit_lake( int i, int j, std::vector <pixel_coordinates> &lake );
 
 
         /** Heat map functions **/
