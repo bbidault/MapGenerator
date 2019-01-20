@@ -2,6 +2,87 @@
 #include "ctime"
 
 
+void world_map::set_seas_lakes_lands()
+{
+    this->visit_sea( 0, 0, 0 );
+
+    for( int i = 1 ; i < width - 1 ; i++ )
+    {
+        for( int j = 1 ; j < height - 1 ; j++ )
+        {
+            if( world[i][j].state == SEA
+                && ( ( world[i + 1][j].altitude < 0 && world[i + 1][j].state ) 
+                     || ( world[i - 1][j].altitude < 0 && world[i - 1][j].state )
+                     || ( world[i][j + 1].altitude < 0 && world[i][j + 1].state )
+                     || ( world[i][j - 1].altitude < 0 && world[i][j - 1].state ) ) ) 
+            {
+                this->visit_sea( i, j, 0 );
+            }
+        }   
+    }
+    
+    this->set_lakes_lands();
+}
+
+void world_map::visit_sea( int i, int j, int k )
+{
+    world[i][j].pixel_visited = true;
+    world[i][j].state = SEA;
+    k++; 
+
+    if( k < 100000 )
+    {
+        if( i > 0 )
+        {
+            if( world[i - 1][j].altitude < 0 && !world[i - 1][j].pixel_visited )
+            {
+                this->visit_sea( i - 1, j, k );
+            }
+        }
+        if( j > 0 )
+        {
+            if( world[i][j - 1].altitude < 0 && !world[i][j - 1].pixel_visited )
+            {
+                this->visit_sea( i, j - 1, k );
+            }
+        }
+        if( i < width - 1 )
+        {
+            if( world[i + 1][j].altitude < 0 && !world[i + 1][j].pixel_visited )
+            {
+                this->visit_sea( i + 1, j, k );
+            }
+        }
+        if( j < height - 1 )
+        {
+            if( world[i][j + 1].altitude < 0 && !world[i][j + 1].pixel_visited )
+            {
+                this->visit_sea( i, j + 1, k );
+            }
+        }
+    }
+
+    k--;
+}
+
+void world_map::set_lakes_lands()
+{
+    for( int i = 0 ; i < width ; i++ )
+    {
+        for( int j = 0 ; j < height ; j++ )
+        {
+            if( world[i][j].altitude < 0 && world[i][j].state != SEA )
+            {
+                world[i][j].state = LAKE;
+            }
+            else if( world[i][j].state != SEA )
+            {
+                world[i][j].state = LAND;
+            }
+        }
+    }
+}
+
 void world_map::create_sources()
 {
     srand(time(NULL));
@@ -57,9 +138,10 @@ void world_map::generate_river( int i, int j )
         }
     }
 
-    if( lowest > 0 && !world[row][col].sea_connected )
+    if( world[row][col].state != SEA && !world[row][col].sea_connected )
     {
-        if( row == i && col == j )
+        if( ( row == i && col == j )
+            || world[row][col].state == LAKE )
         {
             world[row][col].state = LAKE;
             this->generate_lake( row, col );

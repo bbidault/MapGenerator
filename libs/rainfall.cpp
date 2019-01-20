@@ -1,7 +1,17 @@
 #include "world_map.h"
 #include "common.h"
-#include "ctime"
 
+
+void world_map::clear_rainfall()
+{
+    for( int i = 0 ; i < width ; i++ )
+    {
+        for( int j = 0 ; j < height ; j++ )
+        {
+            world[i][j].rainfall = 0;
+        }
+    }
+}
 
 void world_map::create_rainfall()
 {
@@ -9,8 +19,8 @@ void world_map::create_rainfall()
     {
         for( int j = 0 ; j < height ; j++ )
         {
-            /// clouds form at see
-            if( world[i][j].altitude < 0 )
+            /// clouds form over lakes and seas
+            if( world[i][j].state == SEA || world[i][j].state == LAKE )
             {
                 /// if north to the northern horse latitude
                 if( j < height/3 )

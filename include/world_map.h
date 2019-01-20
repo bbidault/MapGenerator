@@ -63,6 +63,19 @@ class world_map
 
         /** Fresh water functions **/
 
+        /// initializes seas, lakes and lands status
+        void set_seas_lakes_lands();
+
+        /** set sea status
+         * 
+         * @param latitute of next pixel
+         * @param longitude of next pixel
+         */
+        void visit_sea( int i, int j, int k );
+
+        /// set lake and land status
+        void set_lakes_lands();
+
         /// generate sources in locations of high rainfall
         void create_sources();
 
@@ -109,6 +122,9 @@ class world_map
 
 
         /** Rainfall map functions **/
+
+        /// clear rainfall values
+        void clear_rainfall();
 
         /// generate rainfall map from water mass locations and air currents
         void create_rainfall();

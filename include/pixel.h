@@ -14,9 +14,10 @@ enum pixel_state
 {
     NOTHING = 0,
     SEA,
+    LAKE,
+    LAND,
     SOURCE,
     RIVER,
-    LAKE,
     CITY,
     ROAD,
     RAILWAY,

@@ -25,6 +25,8 @@ void world_map::create_topography()
     this->create_irregularities( 10, 10 );
 
     this->average_altitude();
+
+    this->set_seas_lakes_lands();
 }
 
 void world_map::randomize_altitude( int prob )
@@ -183,9 +185,8 @@ void world_map::color_topography()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            if( world[i][j].state == RIVER
-                || ( ( world[i][j].state == LAKE 
-                       || world[i][j].altitude < 0 ) 
+            if( world[i][j].state == RIVER || world[i][j].state == LAKE
+                || ( ( world[i][j].altitude < 0 ) 
                      && ( world[i + 1][j].altitude > 0
                           || world[i - 1][j].altitude > 0
                           || world[i][j + 1].altitude > 0
