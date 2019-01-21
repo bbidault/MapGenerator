@@ -1,5 +1,11 @@
 #include "pixel.h"
 
+/// the height of the map
+#define HEIGHT 600
+
+/// the width of the map
+#define WIDTH 1200
+
 
 /// world_map class definition : array of pixels
 class world_map
@@ -13,8 +19,8 @@ class world_map
         /// constructor
         world_map()
         {
-            height = 600;
-            width = 1200;
+            height = HEIGHT;
+            width = WIDTH;
             world = new pixel*[width];
 
             for( int i = 0 ; i < width ; i++ )

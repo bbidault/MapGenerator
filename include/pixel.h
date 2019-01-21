@@ -1,6 +1,9 @@
 #include "stdio.h"
 #include "opencv2/opencv.hpp"
 
+/// sea floor altitude
+#define SEA_FLOOR -2000
+
 
 /// coordinates of a certain pixel
 struct pixel_coordinates
@@ -49,7 +52,7 @@ class pixel
             rainfall_color[0] = 0;
             rainfall_color[1] = 0;
             rainfall_color[2] = 0;
-            altitude = -2000;
+            altitude = SEA_FLOOR;
             temperature = 0;
             rainfall = 0;
             state = NOTHING;
