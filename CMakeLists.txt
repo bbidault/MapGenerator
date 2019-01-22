@@ -15,7 +15,8 @@ add_executable( MapGenerator
                 libs/common.cpp
                 libs/topography.cpp
                 libs/heat.cpp
-                libs/rainfall.cpp )
+                libs/rainfall.cpp
+                libs/freshwater.cpp )
 
 target_link_libraries( MapGenerator 
                        ${OpenCV_LIBS} )

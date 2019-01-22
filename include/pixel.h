@@ -1,14 +1,26 @@
 #include "stdio.h"
 #include "opencv2/opencv.hpp"
 
+/// sea floor altitude
+#define SEA_FLOOR -2000
+
+
+/// coordinates of a certain pixel
+struct pixel_coordinates
+{
+    int row;
+    int col;
+};
 
 /// list of pixel states
 enum pixel_state
 {
     NOTHING = 0,
+    SEA,
+    LAKE,
+    LAND,
     SOURCE,
     RIVER,
-    LAKE,
     CITY,
     ROAD,
     RAILWAY,
@@ -25,6 +37,8 @@ class pixel
         double temperature;
         double rainfall;
         pixel_state state;
+        bool pixel_visited;
+        bool sea_connected;
 
         /// constructor
         pixel()
@@ -38,9 +52,11 @@ class pixel
             rainfall_color[0] = 0;
             rainfall_color[1] = 0;
             rainfall_color[2] = 0;
-            altitude = -2000;
+            altitude = SEA_FLOOR;
             temperature = 0;
             rainfall = 0;
             state = NOTHING;
+            pixel_visited = false;
+            sea_connected = false;
         }
 };

@@ -1,5 +1,11 @@
 #include "pixel.h"
 
+/// the height of the map
+#define HEIGHT 600
+
+/// the width of the map
+#define WIDTH 1200
+
 
 /// world_map class definition : array of pixels
 class world_map
@@ -13,8 +19,8 @@ class world_map
         /// constructor
         world_map()
         {
-            height = 600;
-            width = 1200;
+            height = HEIGHT;
+            width = WIDTH;
             world = new pixel*[width];
 
             for( int i = 0 ; i < width ; i++ )
@@ -57,11 +63,56 @@ class world_map
          */
         void create_irregularities( int prob, int size );
 
-        /// generate sources in locations of high raifall
-        void create_sources();
-
         /// color topographic map
         void color_topography();
+
+
+        /** Fresh water functions **/
+
+        /// initializes seas, lakes and lands status
+        void set_seas_lakes_lands();
+
+        /** set sea status
+         * 
+         * @param latitute of next pixel
+         * @param longitude of next pixel
+         */
+        void visit_sea( int i, int j, int k );
+
+        /// set lake and land status
+        void set_lakes_lands();
+
+        /// generate sources in locations of high rainfall
+        void create_sources();
+
+        /** generate a river from source
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void generate_river( int i, int j );
+
+        /** update rivers and lakes connection status
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void set_connection( int i, int j );
+
+        /** generate a lake from a river
+         * 
+         * @param latitude of the source
+         * @param longitude of the source
+         */
+        void generate_lake( int i, int j );
+
+        /** create a vector listing all the pixels of a lake
+         * 
+         * @param latitude of the lake
+         * @param longitude of the lake 
+         * @param total lake
+         */
+        void visit_lake( int i, int j, std::vector <pixel_coordinates> &lake );
 
 
         /** Heat map functions **/
@@ -77,6 +128,9 @@ class world_map
 
 
         /** Rainfall map functions **/
+
+        /// clear rainfall values
+        void clear_rainfall();
 
         /// generate rainfall map from water mass locations and air currents
         void create_rainfall();
