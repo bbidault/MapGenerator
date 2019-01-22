@@ -113,9 +113,9 @@ void world_map::average_rainfall()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            world[i][j].rainfall = ( ( world[i - 1][j - 1].rainfall + world[i - 1][j + 1].rainfall )*0.71
-                                    + world[i - 1][j].rainfall + world[i][j - 1].rainfall 
-                                    + world[i][j].rainfall*2 ) / 5.42;
+            world[i][j].rainfall = ( ( world[i - 1][j - 1].rainfall + world[i - 1][j + 1].rainfall )/SQRT_2
+                                    + world[i - 1][j].rainfall + world[i][j - 1].rainfall
+                                    + world[i][j].rainfall*2 ) / ( 4 + SQRT_2 );
         }
     }
 
@@ -123,9 +123,9 @@ void world_map::average_rainfall()
     {
         for( int j = height - 2 ; j > 0 ; j-- )
         {
-            world[i][j].rainfall = ( ( world[i + 1][j + 1].rainfall + world[i + 1][j - 1].rainfall )*0.71
+            world[i][j].rainfall = ( ( world[i + 1][j + 1].rainfall + world[i + 1][j - 1].rainfall )/SQRT_2
                                     + world[i + 1][j].rainfall + world[i][j + 1].rainfall
-                                    + world[i][j].rainfall*2 ) / 5.42;
+                                    + world[i][j].rainfall*2 ) / ( 4 + SQRT_2 );
         }
     }
 }

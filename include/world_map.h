@@ -6,6 +6,8 @@
 /// the width of the map
 #define WIDTH 1200
 
+#define SQRT_2 sqrt(2)
+
 
 /// world_map class definition : array of pixels
 class world_map

@@ -35,9 +35,9 @@ void world_map::average_temperature()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            world[i][j].temperature = ( ( world[i - 1][j - 1].temperature + world[i - 1][j + 1].temperature )*0.71
+            world[i][j].temperature = ( ( world[i - 1][j - 1].temperature + world[i - 1][j + 1].temperature )/SQRT_2
                                     + world[i - 1][j].temperature + world[i][j - 1].temperature 
-                                    + world[i][j].temperature*2 ) / 5.42;
+                                    + world[i][j].temperature*2 ) / ( 4 + SQRT_2 );
         }
     }
 
@@ -45,9 +45,9 @@ void world_map::average_temperature()
     {
         for( int j = height - 2 ; j > 0 ; j-- )
         {
-            world[i][j].temperature = ( ( world[i + 1][j + 1].temperature + world[i + 1][j - 1].temperature )*0.71
+            world[i][j].temperature = ( ( world[i + 1][j + 1].temperature + world[i + 1][j - 1].temperature )/SQRT_2
                                     + world[i + 1][j].temperature + world[i][j + 1].temperature
-                                    + world[i][j].temperature*2 ) / 5.42;
+                                    + world[i][j].temperature*2 ) / ( 4 + SQRT_2 );
         }
     }
 }

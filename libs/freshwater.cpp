@@ -118,7 +118,7 @@ void world_map::generate_river( int i, int j )
         {
             if( abs( k - 1 ) == 1 && abs( l - 1 ) == 1 )
             {
-                if( 1.4*world[i + k - 1][j + l - 1].altitude < lowest )
+                if( SQRT_2*world[i + k - 1][j + l - 1].altitude < lowest )
                 {
                     lowest = world[i + k - 1][j + l - 1].altitude;
                     row = i + k - 1;
