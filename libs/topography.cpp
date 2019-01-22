@@ -185,7 +185,8 @@ void world_map::color_topography()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            if( world[i][j].state == RIVER || world[i][j].state == LAKE
+            if( world[i][j].state == RIVER 
+                || world[i][j].state == LAKE
                 || ( ( world[i][j].altitude < 0 ) 
                      && ( world[i + 1][j].altitude > 0
                           || world[i - 1][j].altitude > 0

@@ -11,10 +11,10 @@ void world_map::set_seas_lakes_lands()
         for( int j = 1 ; j < height - 1 ; j++ )
         {
             if( world[i][j].state == SEA
-                && ( ( world[i + 1][j].altitude < 0 && world[i + 1][j].state ) 
-                     || ( world[i - 1][j].altitude < 0 && world[i - 1][j].state )
-                     || ( world[i][j + 1].altitude < 0 && world[i][j + 1].state )
-                     || ( world[i][j - 1].altitude < 0 && world[i][j - 1].state ) ) ) 
+                && ( ( world[i + 1][j].altitude < 0 && world[i + 1][j].state == NOTHING ) 
+                     || ( world[i - 1][j].altitude < 0 && world[i - 1][j].state == NOTHING )
+                     || ( world[i][j + 1].altitude < 0 && world[i][j + 1].state == NOTHING )
+                     || ( world[i][j - 1].altitude < 0 && world[i][j - 1].state == NOTHING ) ) ) 
             {
                 this->visit_sea( i, j, 0 );
             }
@@ -71,11 +71,11 @@ void world_map::set_lakes_lands()
     {
         for( int j = 0 ; j < height ; j++ )
         {
-            if( world[i][j].altitude < 0 && world[i][j].state != SEA )
+            if( world[i][j].altitude < 0 && world[i][j].state == NOTHING )
             {
                 world[i][j].state = LAKE;
             }
-            else if( world[i][j].state != SEA )
+            else if( world[i][j].state == NOTHING )
             {
                 world[i][j].state = LAND;
             }
@@ -91,9 +91,8 @@ void world_map::create_sources()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            if( world[i][j].altitude > 300
-                && world[i][j].rainfall > 1000 
-                && world[i][j].altitude < 2000  )
+            if( world[i][j].altitude > 0
+                && world[i][j].rainfall > 1000 )
             {
                 int k = rand()%500;
 
@@ -119,7 +118,7 @@ void world_map::generate_river( int i, int j )
         {
             if( abs( k - 1 ) == 1 && abs( l - 1 ) == 1 )
             {
-                if( 1.2*world[i + k - 1][j + l - 1].altitude < lowest )
+                if( 1.4*world[i + k - 1][j + l - 1].altitude < lowest )
                 {
                     lowest = world[i + k - 1][j + l - 1].altitude;
                     row = i + k - 1;
@@ -138,23 +137,21 @@ void world_map::generate_river( int i, int j )
         }
     }
 
-    if( world[row][col].state != SEA && !world[row][col].sea_connected )
+    if( world[row][col].state == SEA 
+        || world[row][col].sea_connected == true )
     {
-        if( ( row == i && col == j )
-            || world[row][col].state == LAKE )
-        {
-            world[row][col].state = LAKE;
-            this->generate_lake( row, col );
-        }
-        else
-        {
-            world[row][col].state = RIVER;
-            this->generate_river( row, col );
-        }
+        this->set_connection( row, col );   
+    }
+    else if( ( row == i && col == j )
+             || world[row][col].state == LAKE )
+    {
+        world[row][col].state = LAKE;
+        this->generate_lake( row, col );
     }
     else
     {
-        this->set_connection( row, col );
+        world[row][col].state = RIVER;
+        this->generate_river( row, col );
     }
 }
 
@@ -309,7 +306,6 @@ void world_map::visit_lake( int i, int j, std::vector <pixel_coordinates> &lake 
         new_lake.row = i + 1;
         new_lake.col = j;
         lake.push_back( new_lake );
-        lake.shrink_to_fit();
         this->visit_lake( i + 1, j, lake );
     }
     if( world[i - 1][j].state == LAKE && !world[i - 1][j].pixel_visited )
@@ -317,7 +313,6 @@ void world_map::visit_lake( int i, int j, std::vector <pixel_coordinates> &lake 
         new_lake.row = i - 1;
         new_lake.col = j;
         lake.push_back( new_lake );
-        lake.shrink_to_fit();
         this->visit_lake( i - 1, j, lake );
     }
     if( world[i][j + 1].state == LAKE && !world[i][j + 1].pixel_visited )
@@ -325,7 +320,6 @@ void world_map::visit_lake( int i, int j, std::vector <pixel_coordinates> &lake 
         new_lake.row = i;
         new_lake.col = j + 1;
         lake.push_back( new_lake );
-        lake.shrink_to_fit();
         this->visit_lake( i, j + 1, lake );
     }
     if( world[i][j - 1].state == LAKE && !world[i][j - 1].pixel_visited )
@@ -333,7 +327,6 @@ void world_map::visit_lake( int i, int j, std::vector <pixel_coordinates> &lake 
         new_lake.row = i;
         new_lake.col = j - 1;
         lake.push_back( new_lake );
-        lake.shrink_to_fit();
         this->visit_lake( i, j - 1, lake );
     }
 }
