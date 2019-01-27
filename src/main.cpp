@@ -6,13 +6,13 @@ int main(int argc, char** argv )
 
     world.create_topography();
 
-    world.create_heat();
-
     /// freshwater functions
     world.create_rainfall();
     world.create_sources();
     world.clear_rainfall();
     world.create_rainfall();
+
+    world.create_heat();
 
     /// color the maps
     world.color_topography();
