@@ -12,11 +12,11 @@ int main(int argc, char** argv )
     world.clear_rainfall();
     world.create_rainfall();
 
-    world.create_heat();
+    world.create_temp();
 
     /// color the maps
     world.color_topography();
-    world.color_heat();
+    world.color_temp();
     world.color_rainfall();
 
     world.display_map();

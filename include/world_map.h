@@ -117,16 +117,16 @@ class world_map
         void visit_lake( int i, int j, std::vector <pixel_coordinates> &lake );
 
 
-        /** Heat map functions **/
+        /** Temperature map functions **/
 
-        /// generate heatmap from longitude and altitude
-        void create_heat();
+        /// generate temperature map from longitude and altitude
+        void create_temp();
 
         /// average temperature across the map
         void average_temperature();
 
-        /// color heatmap
-        void color_heat();
+        /// color temperature map
+        void color_temp();
 
 
         /** Rainfall map functions **/
@@ -146,7 +146,7 @@ class world_map
 
         /** other functions **/
 
-        /// display topographic, heat and rainfall maps
+        /// display topographic, temperature and rainfall maps
         void display_map();
 
         /// display max max altitude, max and min temperature and max rainfall

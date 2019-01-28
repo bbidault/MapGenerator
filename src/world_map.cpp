@@ -6,7 +6,11 @@ void world_map::display_map( )
 {
     cv::Mat topographic_map( height, width, CV_8UC3 );
 
-    cv::Mat heat_map( height, width, CV_8UC3 );
+    cv::Mat avg_temp_map( height, width, CV_8UC3 );
+
+    cv::Mat min_temp_map( height, width, CV_8UC3 );
+
+    cv::Mat max_temp_map( height, width, CV_8UC3 );
 
     cv::Mat rainfall_map( height, width, CV_8UC3 );
 
@@ -16,7 +20,11 @@ void world_map::display_map( )
         {
             topographic_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].topography_color;
 
-            heat_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].heat_color;
+            avg_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].avg_temp_color;
+
+            min_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].min_temp_color;
+
+            max_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].max_temp_color;
 
             rainfall_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].rainfall_color;
         }
@@ -24,7 +32,11 @@ void world_map::display_map( )
 
     imshow("Topographic Map", topographic_map);
 
-    imshow("Heat Map", heat_map);
+    imshow("Average temperature Map", avg_temp_map);
+
+    imshow("Minimum temperature Map", min_temp_map);
+
+    imshow("Maximum temperature Map", max_temp_map);
 
     imshow("Rainfall Map", rainfall_map);
 }
@@ -33,7 +45,7 @@ void world_map::find_max()
 {
     double max_altitude = 0;
     double min_temperature = 1000;
-    double max_temperature = 0;
+    double max_temperature = -1000;
     double max_rainfall = 0;
 
     for( int i = 0 ; i < width ; i++ )
@@ -44,13 +56,13 @@ void world_map::find_max()
             {
                 max_altitude = world[i][j].altitude;
             }
-            if( world[i][j].temperature > max_temperature )
+            if( world[i][j].avg_temp > max_temperature )
             {
-                max_temperature = world[i][j].temperature;
+                max_temperature = world[i][j].avg_temp;
             }
-            if( world[i][j].temperature < min_temperature )
+            if( world[i][j].avg_temp < min_temperature )
             {
-                min_temperature = world[i][j].temperature;
+                min_temperature = world[i][j].avg_temp;
             }
             if( world[i][j].rainfall > max_rainfall )
             {
