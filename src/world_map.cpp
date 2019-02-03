@@ -6,11 +6,11 @@ void world_map::display_map( )
 {
     cv::Mat topographic_map( height, width, CV_8UC3 );
 
-    cv::Mat avg_temp_map( height, width, CV_8UC3 );
+    cv::Mat Q2_Q4_temp_map( height, width, CV_8UC3 );
 
-    cv::Mat min_temp_map( height, width, CV_8UC3 );
+    cv::Mat Q1_temp_map( height, width, CV_8UC3 );
 
-    cv::Mat max_temp_map( height, width, CV_8UC3 );
+    cv::Mat Q3_temp_map( height, width, CV_8UC3 );
 
     cv::Mat rainfall_map( height, width, CV_8UC3 );
 
@@ -20,11 +20,11 @@ void world_map::display_map( )
         {
             topographic_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].topography_color;
 
-            avg_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].avg_temp_color;
+            Q2_Q4_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].Q2_Q4_temp_color;
 
-            min_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].min_temp_color;
+            Q1_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].Q1_temp_color;
 
-            max_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].max_temp_color;
+            Q3_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].Q3_temp_color;
 
             rainfall_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].rainfall_color;
         }
@@ -32,11 +32,11 @@ void world_map::display_map( )
 
     imshow("Topographic Map", topographic_map);
 
-    imshow("Average temperature Map", avg_temp_map);
+    imshow("Average temp Map", Q2_Q4_temp_map);
 
-    imshow("Minimum temperature Map", min_temp_map);
+    imshow("Minimum temp Map", Q1_temp_map);
 
-    imshow("Maximum temperature Map", max_temp_map);
+    imshow("Maximum temp Map", Q3_temp_map);
 
     imshow("Rainfall Map", rainfall_map);
 }
@@ -44,8 +44,8 @@ void world_map::display_map( )
 void world_map::find_max()
 {
     double max_altitude = 0;
-    double min_temperature = 1000;
-    double max_temperature = -1000;
+    double min_temp = 1000;
+    double max_temp = -1000;
     double max_rainfall = 0;
 
     for( int i = 0 ; i < width ; i++ )
@@ -56,13 +56,13 @@ void world_map::find_max()
             {
                 max_altitude = world[i][j].altitude;
             }
-            if( world[i][j].avg_temp > max_temperature )
+            if( world[i][j].Q2_Q4_temp > max_temp )
             {
-                max_temperature = world[i][j].avg_temp;
+                max_temp = world[i][j].Q2_Q4_temp;
             }
-            if( world[i][j].avg_temp < min_temperature )
+            if( world[i][j].Q2_Q4_temp < min_temp )
             {
-                min_temperature = world[i][j].avg_temp;
+                min_temp = world[i][j].Q2_Q4_temp;
             }
             if( world[i][j].rainfall > max_rainfall )
             {
@@ -72,7 +72,7 @@ void world_map::find_max()
     }
 
     std::cout << "max altitude : " << max_altitude << std::endl;
-    std::cout << "max temperature : " << max_temperature << std::endl;
-    std::cout << "min temperature : " << min_temperature << std::endl;
+    std::cout << "max temperature : " << max_temp << std::endl;
+    std::cout << "min temperature : " << min_temp << std::endl;
     std::cout << "max rainfall : " << max_rainfall << std::endl;
 }

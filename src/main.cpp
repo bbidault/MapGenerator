@@ -4,14 +4,18 @@ int main(int argc, char** argv )
 {
     world_map world;
 
+    std::cout << "generating topography" << std::endl;
     world.create_topography();
 
     /// freshwater functions
+    std::cout << "generating bodies of fresh water" << std::endl;
     world.create_rainfall();
     world.create_sources();
     world.clear_rainfall();
+    std::cout << "generating rainfall" << std::endl;
     world.create_rainfall();
 
+    std::cout << "generating temperatures" << std::endl;
     world.create_temp();
 
     /// color the maps
