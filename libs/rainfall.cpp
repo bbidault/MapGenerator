@@ -22,7 +22,7 @@ void world_map::create_rainfall()
             /// clouds form over lakes and seas
             if( world[i][j].state == SEA || world[i][j].state == LAKE )
             {
-                /// if north to the northern horse latitude
+                /// if north of the northern Horse latitude
                 if( j < height/3 )
                 { 
                     for( int k = 0 ; k < 18 ; k++ )
@@ -47,7 +47,7 @@ void world_map::create_rainfall()
                         }
                     }
                 }
-                /// if between horse latitudes 
+                /// if between the Horse latitudes 
                 else if( between( j, height/3, height*2/3 ) )
                 {
                     for( int k = 0 ; k < 18 ; k++ )
@@ -72,7 +72,7 @@ void world_map::create_rainfall()
                         }
                     }
                 }
-                /// if south of southern horse latitude
+                /// if south of southern Horse latitude
                 else
                 {
                     for( int k = 0 ; k < 18 ; k++ )
