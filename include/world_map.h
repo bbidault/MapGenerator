@@ -6,6 +6,10 @@
 /// the width of the map
 #define WIDTH 1200
 
+/// the axial tilt of the planet
+#define AXIAL_TILT 23.4
+
+/// square root of 2
 #define SQRT_2 sqrt(2)
 
 

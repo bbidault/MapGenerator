@@ -10,32 +10,37 @@ void world_map::create_temp()
         {
             /// the temperature is affected by the latitude
             /// Tropic of Cancer
-            if( j <= height*66.5/180 )
+            if( j <= height*( 90 - AXIAL_TILT )/180 )
             {
-                world[i][j].Q3_temp = j*40/( height*66.5/180 );
+                world[i][j].Q3_temp = j*40/( height*( 90 - AXIAL_TILT )/180 );
             }
             else
             {
-                world[i][j].Q3_temp = 40 - ( j - height*66.5/180 )*80/( height -  height*66.5/180 );
+                world[i][j].Q3_temp = 40
+                    - ( j - height*( 90 - AXIAL_TILT )/180 )*70
+                        /( height -  height*( 90 - AXIAL_TILT )/180 );
             }
 
             /// Tropic of Capricorn
-            if( j <= height*113.5/180 )
+            if( j <= height*( 90 + AXIAL_TILT )/180 )
             {
-                world[i][j].Q1_temp = -40 + j*80/( height*113.5/180 );
+                world[i][j].Q1_temp = -30 + j*70/( height*( 90 + AXIAL_TILT )/180 );
             }
             else
             {
-                world[i][j].Q1_temp = 40 - ( j - height*113.5/180 )*40/( height - height*113.5/180 );
+                world[i][j].Q1_temp = 40 
+                    - ( j - height*( 90 + AXIAL_TILT )/180 )*40
+                        /( height - height*( 90 + AXIAL_TILT )/180 );
             }
             
             world[i][j].Q2_Q4_temp = ( world[i][j].Q1_temp + world[i][j].Q3_temp )/2;
 
-            /// bodies of water are not affected by seasons (lower thermal conductivity)
+            /// bodies of water are less affected by season, 
+            /// they work as thermal reservoirs
             if( world[i][j].state != LAND )
             {
-                world[i][j].Q1_temp = world[i][j].Q2_Q4_temp;
-                world[i][j].Q3_temp = world[i][j].Q2_Q4_temp;
+                world[i][j].Q1_temp = ( world[i][j].Q1_temp + 9*world[i][j].Q2_Q4_temp)/10;
+                world[i][j].Q3_temp = ( world[i][j].Q3_temp + 9*world[i][j].Q2_Q4_temp)/10;
             }   
 
             /// the temperature is effected by the altitude

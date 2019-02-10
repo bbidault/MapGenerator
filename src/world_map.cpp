@@ -30,15 +30,15 @@ void world_map::display_map( )
         }
     }
 
-    imshow("Topographic Map", topographic_map);
+    imshow("Topographic map", topographic_map);
 
-    imshow("Average temp Map", Q2_Q4_temp_map);
+    imshow("Q2 and Q4 temperature map", Q2_Q4_temp_map);
 
-    imshow("Minimum temp Map", Q1_temp_map);
+    imshow("Q1 temperature map", Q1_temp_map);
 
-    imshow("Maximum temp Map", Q3_temp_map);
+    imshow("Q3 temperature map", Q3_temp_map);
 
-    imshow("Rainfall Map", rainfall_map);
+    imshow("Rainfall map", rainfall_map);
 }
 
 void world_map::find_max()
