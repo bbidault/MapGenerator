@@ -9,11 +9,11 @@ int main(int argc, char** argv )
 
     /// freshwater functions
     std::cout << "generating bodies of fresh water" << std::endl;
-    world.create_rainfall();
+    world.create_precipitation();
     world.create_sources();
-    world.clear_rainfall();
-    std::cout << "generating rainfall" << std::endl;
-    world.create_rainfall();
+    world.clear_precipitation();
+    std::cout << "generating precipitation" << std::endl;
+    world.create_precipitation();
 
     std::cout << "generating temperatures" << std::endl;
     world.create_temp();
@@ -21,7 +21,7 @@ int main(int argc, char** argv )
     /// color the maps
     world.color_topography();
     world.color_temp();
-    world.color_rainfall();
+    world.color_precipitation();
 
     world.display_map();
 

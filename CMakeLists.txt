@@ -14,8 +14,8 @@ add_executable( MapGenerator
                 libs/common.h
                 libs/common.cpp
                 libs/topography.cpp
-                libs/temp.cpp
-                libs/rainfall.cpp
+                libs/temperature.cpp
+                libs/precipitation.cpp
                 libs/freshwater.cpp )
 
 target_link_libraries( MapGenerator 

@@ -9,9 +9,6 @@
 /// the axial tilt of the planet
 #define AXIAL_TILT 23.4
 
-/// square root of 2
-#define SQRT_2 sqrt(2)
-
 
 /// world_map class definition : array of pixels
 class world_map
@@ -88,7 +85,7 @@ class world_map
         /// set lake and land status
         void set_lakes_lands();
 
-        /// generate sources in locations of high rainfall
+        /// generate sources in locations of high precipitation
         void create_sources();
 
         /** generate a river from source
@@ -133,26 +130,26 @@ class world_map
         void color_temp();
 
 
-        /** Rainfall map functions **/
+        /** precipitation map functions **/
 
-        /// clear rainfall values
-        void clear_rainfall();
+        /// clear precipitation values
+        void clear_precipitation();
 
-        /// generate rainfall map from water mass locations and air currents
-        void create_rainfall();
+        /// generate precipitation map from water mass locations and air currents
+        void create_precipitation();
 
-        /// average rainfall across the map
-        void average_rainfall();
+        /// average precipitation across the map
+        void average_precipitation();
 
-        /// color rainfall map
-        void color_rainfall();
+        /// color precipitation map
+        void color_precipitation();
 
 
         /** other functions **/
 
-        /// display topographic, temperature and rainfall maps
+        /// display topographic, temperature and precipitation maps
         void display_map();
 
-        /// display max max altitude, max and min temperature and max rainfall
+        /// display max max altitude, max and min temperature and max precipitation
         void find_max();
 };

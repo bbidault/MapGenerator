@@ -1,6 +1,5 @@
 #include "world_map.h"
 #include "common.h"
-#include "ctime"
 
 
 void world_map::create_topography()

@@ -12,7 +12,7 @@ void world_map::display_map( )
 
     cv::Mat Q3_temp_map( height, width, CV_8UC3 );
 
-    cv::Mat rainfall_map( height, width, CV_8UC3 );
+    cv::Mat precipitation_map( height, width, CV_8UC3 );
 
     for( int i = 0 ; i < width ; i++ )
     {
@@ -26,7 +26,7 @@ void world_map::display_map( )
 
             Q3_temp_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].Q3_temp_color;
 
-            rainfall_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].rainfall_color;
+            precipitation_map.at<cv::Vec3b>(cv::Point(i,j)) = world[i][j].precipitation_color;
         }
     }
 
@@ -38,7 +38,7 @@ void world_map::display_map( )
 
     imshow("Q3 temperature map", Q3_temp_map);
 
-    imshow("Rainfall map", rainfall_map);
+    imshow("Precipitation map", precipitation_map);
 }
 
 void world_map::find_max()
@@ -46,7 +46,7 @@ void world_map::find_max()
     double max_altitude = 0;
     double min_temp = 1000;
     double max_temp = -1000;
-    double max_rainfall = 0;
+    double max_precipitation = 0;
 
     for( int i = 0 ; i < width ; i++ )
     {
@@ -64,9 +64,9 @@ void world_map::find_max()
             {
                 min_temp = world[i][j].Q2_Q4_temp;
             }
-            if( world[i][j].rainfall > max_rainfall )
+            if( world[i][j].precipitation > max_precipitation )
             {
-                max_rainfall = world[i][j].rainfall;
+                max_precipitation = world[i][j].precipitation;
             }
         }
     }
@@ -74,5 +74,5 @@ void world_map::find_max()
     std::cout << "max altitude : " << max_altitude << std::endl;
     std::cout << "max temperature : " << max_temp << std::endl;
     std::cout << "min temperature : " << min_temp << std::endl;
-    std::cout << "max rainfall : " << max_rainfall << std::endl;
+    std::cout << "max precipitation : " << max_precipitation << std::endl;
 }
