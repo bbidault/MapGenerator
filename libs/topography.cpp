@@ -1,6 +1,5 @@
 #include "world_map.h"
 #include "common.h"
-#include "ctime"
 
 
 void world_map::create_topography()
@@ -142,9 +141,9 @@ void world_map::average_altitude()
     {
         for( int j = 1 ; j < height - 1 ; j++ )
         {
-            world[i][j].altitude = ( ( world[i - 1][j - 1].altitude + world[i - 1][j + 1].altitude )*0.71
+            world[i][j].altitude = ( ( world[i - 1][j - 1].altitude + world[i - 1][j + 1].altitude )/SQRT_2
                                     + world[i - 1][j].altitude + world[i][j - 1].altitude 
-                                    + world[i][j].altitude*2 ) / 5.42;
+                                    + world[i][j].altitude*2 ) / ( 4 + SQRT_2 );
         }
     }
 
@@ -152,9 +151,9 @@ void world_map::average_altitude()
     {
         for( int j = height - 2 ; j > 0 ; j-- )
         {
-            world[i][j].altitude = ( ( world[i + 1][j + 1].altitude + world[i + 1][j - 1].altitude )*0.71
+            world[i][j].altitude = ( ( world[i + 1][j + 1].altitude + world[i + 1][j - 1].altitude )/SQRT_2
                                     + world[i + 1][j].altitude + world[i][j + 1].altitude
-                                    + world[i][j].altitude*2 ) / 5.42;
+                                    + world[i][j].altitude*2 ) / ( 4 + SQRT_2 );
         }
     }
 }

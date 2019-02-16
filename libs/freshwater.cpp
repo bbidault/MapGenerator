@@ -1,5 +1,5 @@
 #include "world_map.h"
-#include "ctime"
+#include "common.h"
 
 
 void world_map::set_seas_lakes_lands()
@@ -92,7 +92,7 @@ void world_map::create_sources()
         for( int j = 1 ; j < height - 1 ; j++ )
         {
             if( world[i][j].altitude > 0
-                && world[i][j].rainfall > 1000 )
+                && world[i][j].precipitation > 1000 )
             {
                 int k = rand()%500;
 
@@ -118,7 +118,7 @@ void world_map::generate_river( int i, int j )
         {
             if( abs( k - 1 ) == 1 && abs( l - 1 ) == 1 )
             {
-                if( 1.4*world[i + k - 1][j + l - 1].altitude < lowest )
+                if( SQRT_2*world[i + k - 1][j + l - 1].altitude < lowest )
                 {
                     lowest = world[i + k - 1][j + l - 1].altitude;
                     row = i + k - 1;

@@ -4,24 +4,26 @@ int main(int argc, char** argv )
 {
     world_map world;
 
+    std::cout << "generating topography" << std::endl;
     world.create_topography();
 
-    world.create_heat();
-
     /// freshwater functions
-    world.create_rainfall();
+    std::cout << "generating bodies of fresh water" << std::endl;
+    world.create_precipitation();
     world.create_sources();
-    world.clear_rainfall();
-    world.create_rainfall();
+    world.clear_precipitation();
+    std::cout << "generating precipitation" << std::endl;
+    world.create_precipitation();
+
+    std::cout << "generating temperatures" << std::endl;
+    world.create_temp();
 
     /// color the maps
     world.color_topography();
-    world.color_heat();
-    world.color_rainfall();
+    world.color_temp();
+    world.color_precipitation();
 
     world.display_map();
-
-    world.find_max();
 
     cv::waitKey(0);
 

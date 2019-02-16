@@ -6,6 +6,9 @@
 /// the width of the map
 #define WIDTH 1200
 
+/// the axial tilt of the planet
+#define AXIAL_TILT 23.4
+
 
 /// world_map class definition : array of pixels
 class world_map
@@ -82,7 +85,7 @@ class world_map
         /// set lake and land status
         void set_lakes_lands();
 
-        /// generate sources in locations of high rainfall
+        /// generate sources in locations of high precipitation
         void create_sources();
 
         /** generate a river from source
@@ -115,38 +118,35 @@ class world_map
         void visit_lake( int i, int j, std::vector <pixel_coordinates> &lake );
 
 
-        /** Heat map functions **/
+        /** Temperature map functions **/
 
-        /// generate heatmap from longitude and altitude
-        void create_heat();
+        /// generate temperature map from longitude and altitude
+        void create_temp();
 
         /// average temperature across the map
         void average_temperature();
 
-        /// color heatmap
-        void color_heat();
+        /// color temperature map
+        void color_temp();
 
 
-        /** Rainfall map functions **/
+        /** precipitation map functions **/
 
-        /// clear rainfall values
-        void clear_rainfall();
+        /// clear precipitation values
+        void clear_precipitation();
 
-        /// generate rainfall map from water mass locations and air currents
-        void create_rainfall();
+        /// generate precipitation map from water mass locations and air currents
+        void create_precipitation();
 
-        /// average rainfall across the map
-        void average_rainfall();
+        /// average precipitation across the map
+        void average_precipitation();
 
-        /// color rainfall map
-        void color_rainfall();
+        /// color precipitation map
+        void color_precipitation();
 
 
         /** other functions **/
 
-        /// display topographic, heat and rainfall maps
+        /// display topographic, temperature and precipitation maps
         void display_map();
-
-        /// display max max altitude, max and min temperature and max rainfall
-        void find_max();
 };

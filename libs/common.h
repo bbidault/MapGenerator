@@ -1,3 +1,9 @@
+#include "ctime"
+
+/// square root of 2
+#define SQRT_2 sqrt(2)
+
+
 /** test if a value x is between two margins
  * 
  * @param number to test
