@@ -149,7 +149,4 @@ class world_map
 
         /// display topographic, temperature and precipitation maps
         void display_map();
-
-        /// display max max altitude, max and min temperature and max precipitation
-        void find_max();
 };

@@ -25,8 +25,6 @@ int main(int argc, char** argv )
 
     world.display_map();
 
-    world.find_max();
-
     cv::waitKey(0);
 
     return 0;

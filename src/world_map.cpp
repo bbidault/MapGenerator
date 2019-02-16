@@ -40,39 +40,3 @@ void world_map::display_map( )
 
     imshow("Precipitation map", precipitation_map);
 }
-
-void world_map::find_max()
-{
-    double max_altitude = 0;
-    double min_temp = 1000;
-    double max_temp = -1000;
-    double max_precipitation = 0;
-
-    for( int i = 0 ; i < width ; i++ )
-    {
-        for( int j = 0 ; j < height ; j++ )
-        {
-            if( world[i][j].altitude > max_altitude )
-            {
-                max_altitude = world[i][j].altitude;
-            }
-            if( world[i][j].Q2_Q4_temp > max_temp )
-            {
-                max_temp = world[i][j].Q2_Q4_temp;
-            }
-            if( world[i][j].Q2_Q4_temp < min_temp )
-            {
-                min_temp = world[i][j].Q2_Q4_temp;
-            }
-            if( world[i][j].precipitation > max_precipitation )
-            {
-                max_precipitation = world[i][j].precipitation;
-            }
-        }
-    }
-
-    std::cout << "max altitude : " << max_altitude << std::endl;
-    std::cout << "max temperature : " << max_temp << std::endl;
-    std::cout << "min temperature : " << min_temp << std::endl;
-    std::cout << "max precipitation : " << max_precipitation << std::endl;
-}
