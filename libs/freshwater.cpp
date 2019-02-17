@@ -11,10 +11,10 @@ void world_map::set_seas_lakes_lands()
         for( int j = 1 ; j < height - 1 ; j++ )
         {
             if( world[i][j].state == SEA
-                && ( ( world[i + 1][j].altitude < 0 && world[i + 1][j].state == NOTHING ) 
-                     || ( world[i - 1][j].altitude < 0 && world[i - 1][j].state == NOTHING )
-                     || ( world[i][j + 1].altitude < 0 && world[i][j + 1].state == NOTHING )
-                     || ( world[i][j - 1].altitude < 0 && world[i][j - 1].state == NOTHING ) ) ) 
+                && ( ( world[i + 1][j].altitude < 0 && world[i + 1][j].state == NO_STATE ) 
+                     || ( world[i - 1][j].altitude < 0 && world[i - 1][j].state == NO_STATE )
+                     || ( world[i][j + 1].altitude < 0 && world[i][j + 1].state == NO_STATE )
+                     || ( world[i][j - 1].altitude < 0 && world[i][j - 1].state == NO_STATE ) ) ) 
             {
                 this->visit_sea( i, j, 0 );
             }
@@ -71,11 +71,11 @@ void world_map::set_lakes_lands()
     {
         for( int j = 0 ; j < height ; j++ )
         {
-            if( world[i][j].altitude < 0 && world[i][j].state == NOTHING )
+            if( world[i][j].altitude < 0 && world[i][j].state == NO_STATE )
             {
                 world[i][j].state = LAKE;
             }
-            else if( world[i][j].state == NOTHING )
+            else if( world[i][j].state == NO_STATE )
             {
                 world[i][j].state = LAND;
             }

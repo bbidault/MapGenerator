@@ -145,8 +145,20 @@ class world_map
         void color_precipitation();
 
 
+        /** biome map functions **/
+
+        /// evaluate pixel biome from temperature and precipitation
+        void set_biome();
+
+        /// color biome map
+        void color_biome();
+
+
         /** other functions **/
 
         /// display topographic, temperature and precipitation maps
         void display_map();
+
+        /// display max max altitude, max and min temperature and max precipitation
+        void find_max();
 };

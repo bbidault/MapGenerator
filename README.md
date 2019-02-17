@@ -1,6 +1,6 @@
 # MapGenerator
 
-MapGenerator is an earth-like planet generator/simulator. It auto-generates a planet by following a set of physical rules that apply to the earth. The application generates and displays a topographic map, a precipitation map and a set of temperature maps.
+MapGenerator is an earth-like planet generator/simulator. It auto-generates a planet by following a set of physical rules that apply to the earth. The application generates and displays a topographic map, a precipitation map, a set of temperature maps and a biomes map.
 
 ## Dependencies
 

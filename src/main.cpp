@@ -18,12 +18,18 @@ int main(int argc, char** argv )
     std::cout << "generating temperatures" << std::endl;
     world.create_temp();
 
+    std::cout << "generating biomes" << std::endl;
+    world.set_biome();
+
     /// color the maps
     world.color_topography();
     world.color_temp();
     world.color_precipitation();
+    world.color_biome();
 
     world.display_map();
+
+    world.find_max();
 
     cv::waitKey(0);
 
