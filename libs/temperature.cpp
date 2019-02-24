@@ -53,7 +53,7 @@ void world_map::create_temp()
         }
     }
 
-    for( int i = 0 ; i < 50 ; i++ )
+    for( int i = 0 ; i < 30 ; i++ )
     {
         this->average_temperature();
     }

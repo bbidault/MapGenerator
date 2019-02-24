@@ -250,8 +250,7 @@ void world_map::color_topography()
                 world[i][j].topography_color[1] = 236;
                 world[i][j].topography_color[2] = 198;
             }
-            else if( between( world[i][j].altitude, -200, 0 )
-                    || world[i][j].state == LAKE )
+            else if( between( world[i][j].altitude, -200, 0 ) )
             {
                 world[i][j].topography_color[0] = 254;
                 world[i][j].topography_color[1] = 242;

@@ -22,13 +22,16 @@ void world_map::create_precipitation()
             /// clouds form over lakes and seas
             if( world[i][j].state == SEA || world[i][j].state == LAKE )
             {
+                world[i][j].precipitation += 1000;
+
                 /// if north of the northern Horse latitude
                 if( j < height/3 )
                 { 
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - abs( ( j*width*6 )/( 5*height ) - width/5 );
+                        int max = width/6 - abs( ( j*width*6 )/( 6*height ) - width/6 )
+                                    + width/5 - abs( ( j*width*2 )/( 5*height ) - width/5 );
 
                         if( ( i + l ) < ( width - 1 ) )
                         {
@@ -36,13 +39,13 @@ void world_map::create_precipitation()
                                    && l <= max
                                    && ( i + l ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += 1;
+                                world[i + l][j].precipitation += 0.5;
                                 l++;
                             }
 
                             if( ( i + l ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += ( max - l );
+                                world[i + l][j].precipitation += ( max - l )*0.5;
                             }
                         }
                     }
@@ -53,7 +56,8 @@ void world_map::create_precipitation()
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - abs( ( ( j - height/3 )*width*6 )/( 5*height ) - width/5 );
+                        int max = width/6 - abs( ( ( j - height/3 )*width*6 )/( 6*height ) - width/6 )
+                                    + width/5 - abs( ( j*width*2 )/( 5*height ) - width/5 );
 
                         if( ( i - l ) > 0 )
                         {
@@ -61,13 +65,13 @@ void world_map::create_precipitation()
                                    && l <= max 
                                    && ( i - l ) > 0 )
                             {
-                                world[i - l][j].precipitation += 1;
+                                world[i - l][j].precipitation += 0.5;
                                 l++;
                             }
 
                             if( ( i - l ) > 0 )
                             {
-                                world[i - l][j].precipitation += ( max - l );
+                                world[i - l][j].precipitation += ( max - l )*0.5;
                             }
                         }
                     }
@@ -78,7 +82,8 @@ void world_map::create_precipitation()
                     for( int k = 0 ; k < 18 ; k++ )
                     {
                         int l = 1;
-                        int max = width/5 - abs( ( ( j - height*2/3 )*width*6 )/( 5*height ) - width/5 );
+                        int max = width/6 - abs( ( ( j - height*2/3 )*width*6 )/( 6*height ) - width/6 )
+                                    + width/5 - abs( ( j*width*2 )/( 5*height ) - width/5 );
 
                         if( ( i + l ) < ( width - 1 ) )
                         {
@@ -86,17 +91,21 @@ void world_map::create_precipitation()
                                    && l <= max
                                    && ( i + l ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += 1;
+                                world[i + l][j].precipitation += 0.5;
                                 l++;
                             }
 
                             if( ( i + l ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += ( max - l );
+                                world[i + l][j].precipitation += ( max - l )*0.5;
                             }
                         }
                     }
                 }
+            }
+            else if( world[i][j].state == RIVER )
+            {
+                world[i][j].precipitation += 1000;
             }
         }
     }

@@ -6,7 +6,110 @@ void world_map::set_biome()
     {
         for( int j = 0 ; j < height ; j++ )
         {
-
+            if( world[i][j].state == SEA || world[i][j].state == LAKE)
+            {
+                if( world[i][j].Q2_Q4_temp < -10 )
+                {
+                    world[i][j].biome = POLAR_DESERT;
+                }
+            }
+            else
+            {
+                if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*4500/10 - 7875 )
+                {
+                    if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*500/35 - 500/7 )
+                    {
+                        world[i][j].biome = ARID_DESERT;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*750/30 )
+                    {
+                        world[i][j].biome = XERIC_SHRUBLAND;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*1000/15 - 1000 )
+                    {
+                        world[i][j].biome = SEMIARID_DESERT;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*1250/30 )
+                    {
+                        world[i][j].biome = GRASS_SAVANNA;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*2000/42.5 + 12.5*2000/42.5 )
+                    {
+                        world[i][j].biome = TREE_SAVANNA;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*2750/42.5 + 12.5*2750/42.5 )
+                    {
+                        world[i][j].biome = SUBTROPICAL_DRY_FOREST;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*3500/42.5 + 12.5*3500/42.5 )
+                    {
+                        world[i][j].biome = SUBTROPICAL_RAINFOREST;
+                    }
+                    else
+                    {
+                        world[i][j].biome = TROPICAL_RAINFOREST;
+                    }
+                }
+                else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*4500/10 - 2250 )
+                {
+                    if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*500/35 - 500/7 )
+                    {
+                        world[i][j].biome = DRY_STEPPE;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*750/30 )
+                    {
+                        world[i][j].biome = TEMPERATE_STEPPE;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*1250/30 )
+                    {
+                        world[i][j].biome = CHAPPARALS;
+                    }
+                    else
+                    {
+                        if( world[i][j].altitude < 2000 )
+                        {
+                            world[i][j].biome = TEMPERATE_FOREST;
+                        }
+                        else
+                        {
+                            world[i][j].biome = MONTANE_FOREST;
+                        }
+                    }
+                }
+                else if( world[i][j].Q2_Q4_temp > 0 )
+                {
+                    if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*500/35 - 500/7 )
+                    {
+                        world[i][j].biome = DRY_STEPPE;
+                    }
+                    else if( world[i][j].precipitation < world[i][j].Q2_Q4_temp*1250/30 )
+                    {
+                        world[i][j].biome = CHAPPARALS;
+                    }
+                    else
+                    {
+                        world[i][j].biome = TAIGA;
+                    }
+                }
+                else
+                {
+                    if( world[i][j].Q2_Q4_temp > -5 )
+                    {
+                        if( world[i][j].altitude < 2000 )
+                        {
+                            world[i][j].biome = TUNDRA;
+                        }
+                        else
+                        {
+                            world[i][j].biome = ALPINE_TUNDRA;
+                        }
+                    }
+                    else
+                    {
+                        world[i][j].biome = POLAR_DESERT;
+                    }
+                }
+            }
         }
     }
 }
