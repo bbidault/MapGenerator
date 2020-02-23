@@ -1,6 +1,6 @@
 #include "world_map.h"
 
-int main(int argc, char** argv )
+int main( int argc, char * *argv )
 {
     world_map world;
 
@@ -27,7 +27,7 @@ int main(int argc, char** argv )
     world.color_precipitation();
     world.color_biome( true );
 
-    for ( int i = 0 ; i < 3 ; i++ )
+    for ( int i = 0; i < 3; i++ )
     {
         world.average_biome_color();
     }
@@ -36,7 +36,7 @@ int main(int argc, char** argv )
 
     world.find_max();
 
-    cv::waitKey(0);
+    cv::waitKey( 0 );
 
     return 0;
 }

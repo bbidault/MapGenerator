@@ -2,7 +2,7 @@
 
 bool between( double x, double a, double b )
 {
-    if( x >= a && x < b)
+    if ( ( x >= a ) && ( x < b ) )
     {
         return true;
     }
@@ -14,7 +14,7 @@ bool between( double x, double a, double b )
 
 int abs( int a )
 {
-    if( a >= 0 )
+    if ( a >= 0 )
     {
         return a;
     }
@@ -28,7 +28,7 @@ int pow( int x, int y )
 {
     int k = 1;
 
-    for( int i = 0 ; i < y ; i++ )
+    for ( int i = 0; i < y; i++ )
     {
         k *= x;
     }

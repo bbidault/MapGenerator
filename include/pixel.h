@@ -4,7 +4,6 @@
 /// sea floor altitude
 #define SEA_FLOOR -2000
 
-
 /// coordinates of a certain pixel
 struct pixel_coordinates
 {
@@ -73,32 +72,32 @@ class pixel
         /// constructor
         pixel()
         {
-            topography_color[0] = 0;
-            topography_color[1] = 0;
-            topography_color[2] = 0;
-            Q2_Q4_temp_color[0] = 0;
-            Q2_Q4_temp_color[1] = 0;
-            Q2_Q4_temp_color[2] = 0;
-            Q1_temp_color[0] = 0;
-            Q1_temp_color[1] = 0;
-            Q1_temp_color[2] = 0;
-            Q3_temp_color[0] = 0;
-            Q3_temp_color[1] = 0;
-            Q3_temp_color[2] = 0;
+            topography_color[0]    = 0;
+            topography_color[1]    = 0;
+            topography_color[2]    = 0;
+            Q2_Q4_temp_color[0]    = 0;
+            Q2_Q4_temp_color[1]    = 0;
+            Q2_Q4_temp_color[2]    = 0;
+            Q1_temp_color[0]       = 0;
+            Q1_temp_color[1]       = 0;
+            Q1_temp_color[2]       = 0;
+            Q3_temp_color[0]       = 0;
+            Q3_temp_color[1]       = 0;
+            Q3_temp_color[2]       = 0;
             precipitation_color[0] = 0;
             precipitation_color[1] = 0;
             precipitation_color[2] = 0;
-            biome_color[0] = 0;
-            biome_color[1] = 0;
-            biome_color[2] = 0;
-            altitude = SEA_FLOOR;
-            Q2_Q4_temp = 0;
-            Q1_temp = 0;
-            Q3_temp = 0;
-            precipitation = 0;
-            state = NO_STATE;
-            pixel_visited = false;
-            sea_connected = false;
-            biome = NO_BIOME;
+            biome_color[0]         = 0;
+            biome_color[1]         = 0;
+            biome_color[2]         = 0;
+            altitude               = SEA_FLOOR;
+            Q2_Q4_temp             = 0;
+            Q1_temp                = 0;
+            Q3_temp                = 0;
+            precipitation          = 0;
+            state                  = NO_STATE;
+            pixel_visited          = false;
+            sea_connected          = false;
+            biome                  = NO_BIOME;
         }
 };

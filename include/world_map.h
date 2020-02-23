@@ -9,24 +9,23 @@
 /// the axial tilt of the planet
 #define AXIAL_TILT 23.4
 
-
 /// world_map class definition : array of pixels
 class world_map
 {
     private:
         int height;
         int width;
-        pixel **world;
+        pixel * *world;
 
     public:
         /// constructor
         world_map()
         {
             height = HEIGHT;
-            width = WIDTH;
-            world = new pixel*[width];
+            width  = WIDTH;
+            world  = new pixel *[width];
 
-            for( int i = 0 ; i < width ; i++ )
+            for ( int i = 0; i < width; i++ )
             {
                 world[i] = new pixel[height];
             }
@@ -35,9 +34,8 @@ class world_map
         /// destructor
         ~world_map()
         {
-            delete [] world;
+            delete[] world;
         }
-
 
         /** Topographic map functions **/
 
@@ -45,7 +43,7 @@ class world_map
         void create_topography();
 
         /** generates random high points on the map
-         * 
+         *
          * @param probability of altitude > 0
          */
         void randomize_altitude( int prob );
@@ -60,15 +58,15 @@ class world_map
         void average_altitude();
 
         /** create random altutude irregularities
-         * 
+         *
          * @param probability of irregularity
          * @param size of irregularity
          */
-        void create_irregularities( int prob, int size );
+        void create_irregularities( int prob,
+                                    int size );
 
         /// color topographic map
         void color_topography();
-
 
         /** Fresh water functions **/
 
@@ -76,11 +74,13 @@ class world_map
         void set_seas_lakes_lands();
 
         /** set sea status
-         * 
+         *
          * @param latitute of next pixel
          * @param longitude of next pixel
          */
-        void visit_sea( int i, int j, int k );
+        void visit_sea( int i,
+                        int j,
+                        int k );
 
         /// set lake and land status
         void set_lakes_lands();
@@ -89,34 +89,38 @@ class world_map
         void create_sources();
 
         /** generate a river from source
-         * 
+         *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void generate_river( int i, int j );
+        void generate_river( int i,
+                             int j );
 
         /** update rivers and lakes connection status
-         * 
+         *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void set_connection( int i, int j );
+        void set_connection( int i,
+                             int j );
 
         /** generate a lake from a river
-         * 
+         *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void generate_lake( int i, int j );
+        void generate_lake( int i,
+                            int j );
 
         /** create a vector listing all the pixels of a lake
-         * 
+         *
          * @param latitude of the lake
-         * @param longitude of the lake 
+         * @param longitude of the lake
          * @param total lake
          */
-        void visit_lake( int i, int j, std::vector <pixel_coordinates> &lake );
-
+        void visit_lake( int                            i,
+                         int                            j,
+                         std::vector<pixel_coordinates> &lake );
 
         /** Temperature map functions **/
 
@@ -128,7 +132,6 @@ class world_map
 
         /// color temperature map
         void color_temp();
-
 
         /** precipitation map functions **/
 
@@ -144,7 +147,6 @@ class world_map
         /// color precipitation map
         void color_precipitation();
 
-
         /** biome map functions **/
 
         /// evaluate pixel biome from temperature and precipitation
@@ -155,7 +157,6 @@ class world_map
 
         ///  average biome color map
         void average_biome_color();
-
 
         /** other functions **/
 
