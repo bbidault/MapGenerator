@@ -151,7 +151,10 @@ class world_map
         void set_biome();
 
         /// color biome map
-        void color_biome();
+        void color_biome( bool realist );
+
+        ///  average biome color map
+        void average_biome_color();
 
 
         /** other functions **/

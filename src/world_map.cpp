@@ -36,13 +36,13 @@ void world_map::display_map( )
 
     imshow("Topographic map", topographic_map);
 
-    imshow("Q2 and Q4 temperature map", Q2_Q4_temp_map);
-
-    imshow("Q1 temperature map", Q1_temp_map);
-
-    imshow("Q3 temperature map", Q3_temp_map);
-
-    imshow("Precipitation map", precipitation_map);
+//    imshow("Q2 and Q4 temperature map", Q2_Q4_temp_map);
+//
+//    imshow("Q1 temperature map", Q1_temp_map);
+//
+//    imshow("Q3 temperature map", Q3_temp_map);
+//
+//    imshow("Precipitation map", precipitation_map);
 
     imshow("Biomes map", biome_map);
 }

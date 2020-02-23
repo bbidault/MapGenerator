@@ -59,7 +59,7 @@ class pixel
         cv::Vec3b Q1_temp_color;
         cv::Vec3b Q3_temp_color;
         cv::Vec3b precipitation_color;
-        cv::Vec3b biome_color;
+        cv::Vec3i biome_color;
         double altitude;
         double Q2_Q4_temp;
         double Q1_temp;

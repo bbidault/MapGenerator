@@ -25,7 +25,12 @@ int main(int argc, char** argv )
     world.color_topography();
     world.color_temp();
     world.color_precipitation();
-    world.color_biome();
+    world.color_biome( true );
+
+    for ( int i = 0 ; i < 3 ; i++ )
+    {
+        world.average_biome_color();
+    }
 
     world.display_map();
 
