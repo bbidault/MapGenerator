@@ -1,7 +1,7 @@
 #include "world_map.h"
 #include "common.h"
 
-void world_map::clear_precipitation()
+void WorldMap::clearPrecipitation()
 {
     for ( int i = 0; i < width; i++ )
     {
@@ -12,7 +12,7 @@ void world_map::clear_precipitation()
     }
 }
 
-void world_map::create_precipitation()
+void WorldMap::createPrecipitation()
 {
     for ( int i = 0; i < width; i++ )
     {
@@ -111,11 +111,11 @@ void world_map::create_precipitation()
 
     for ( int i = 0; i < 30; i++ )
     {
-        this->average_precipitation();
+        this->averagePrecipitation();
     }
 }
 
-void world_map::average_precipitation()
+void WorldMap::averagePrecipitation()
 {
     for ( int i = 1; i < width - 1; i++ )
     {
@@ -138,15 +138,15 @@ void world_map::average_precipitation()
     }
 }
 
-void world_map::color_precipitation()
+void WorldMap::colorPrecipitation()
 {
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            world[i][j].precipitation_color[0] = 255 - world[i][j].precipitation * 255 / 10000;
-            world[i][j].precipitation_color[1] = 255 - world[i][j].precipitation * 255 / 10000;
-            world[i][j].precipitation_color[2] = 255;
+            world[i][j].precipitationColor[0] = 255 - world[i][j].precipitation * 255 / 10000;
+            world[i][j].precipitationColor[1] = 255 - world[i][j].precipitation * 255 / 10000;
+            world[i][j].precipitationColor[2] = 255;
         }
     }
 }

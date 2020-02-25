@@ -9,44 +9,48 @@
 /// the axial tilt of the planet
 #define AXIAL_TILT 23.4
 
-/// world_map class definition : array of pixels
-class world_map
+/// WorldMap class definition : array of pixels
+class WorldMap
 {
     private:
         int height;
         int width;
-        pixel * *world;
+        Pixel * *world;
 
     public:
         /// constructor
-        world_map()
+        WorldMap()
         {
             height = HEIGHT;
             width  = WIDTH;
-            world  = new pixel *[width];
+            world  = new Pixel *[width];
 
             for ( int i = 0; i < width; i++ )
             {
-                world[i] = new pixel[height];
+                world[i] = new Pixel[height];
             }
         }
 
         /// destructor
-        ~world_map()
+        ~WorldMap()
         {
+            for ( int i = 0; i < width; i++ )
+            {
+                delete[] world[i];
+            }
             delete[] world;
         }
 
         /** Topographic map functions **/
 
         /// main topography function
-        void create_topography();
+        void createTopography();
 
         /** generates random high points on the map
          *
          * @param probability of altitude > 0
          */
-        void randomize_altitude( int prob );
+        void randomizeAltitude( int prob );
 
         /// dilate points of altitude > 0
         void dilation();
@@ -55,62 +59,62 @@ class world_map
         void erosion();
 
         /// average altitude across the map
-        void average_altitude();
+        void averageAltitude();
 
         /** create random altutude irregularities
          *
          * @param probability of irregularity
          * @param size of irregularity
          */
-        void create_irregularities( int prob,
-                                    int size );
+        void createIrregularities( int prob,
+                                   int size );
 
         /// color topographic map
-        void color_topography();
+        void colorTopography();
 
         /** Fresh water functions **/
 
         /// initializes seas, lakes and lands status
-        void set_seas_lakes_lands();
+        void setSeasLakesLands();
 
         /** set sea status
          *
          * @param latitute of next pixel
          * @param longitude of next pixel
          */
-        void visit_sea( int i,
-                        int j,
-                        int k );
+        void visitSea( int i,
+                       int j,
+                       int k );
 
         /// set lake and land status
-        void set_lakes_lands();
+        void setLakesLands();
 
         /// generate sources in locations of high precipitation
-        void create_sources();
+        void createSources();
 
         /** generate a river from source
          *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void generate_river( int i,
-                             int j );
+        void generateRiver( int i,
+                            int j );
 
         /** update rivers and lakes connection status
          *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void set_connection( int i,
-                             int j );
+        void setConnection( int i,
+                            int j );
 
         /** generate a lake from a river
          *
          * @param latitude of the source
          * @param longitude of the source
          */
-        void generate_lake( int i,
-                            int j );
+        void generateLake( int i,
+                           int j );
 
         /** create a vector listing all the pixels of a lake
          *
@@ -118,51 +122,51 @@ class world_map
          * @param longitude of the lake
          * @param total lake
          */
-        void visit_lake( int                            i,
-                         int                            j,
-                         std::vector<pixel_coordinates> &lake );
+        void visitLake( int                             i,
+                        int                             j,
+                        std::vector<PixelCoordinates_T> &lake );
 
         /** Temperature map functions **/
 
         /// generate temperature map from longitude and altitude
-        void create_temp();
+        void createTemp();
 
         /// average temperature across the map
-        void average_temperature();
+        void averageTemperature();
 
         /// color temperature map
-        void color_temp();
+        void colorTemp();
 
         /** precipitation map functions **/
 
         /// clear precipitation values
-        void clear_precipitation();
+        void clearPrecipitation();
 
         /// generate precipitation map from water mass locations and air currents
-        void create_precipitation();
+        void createPrecipitation();
 
         /// average precipitation across the map
-        void average_precipitation();
+        void averagePrecipitation();
 
         /// color precipitation map
-        void color_precipitation();
+        void colorPrecipitation();
 
         /** biome map functions **/
 
         /// evaluate pixel biome from temperature and precipitation
-        void set_biome();
+        void setBiome();
 
         /// color biome map
-        void color_biome( bool realist );
+        void colorBiome( bool aRealist );
 
         ///  average biome color map
-        void average_biome_color();
+        void averageBiomeColor();
 
         /** other functions **/
 
         /// display topographic, temperature and precipitation maps
-        void display_map();
+        void displayMap();
 
         /// display max max altitude, max and min temperature and max precipitation
-        void find_max();
+        void findMax();
 };

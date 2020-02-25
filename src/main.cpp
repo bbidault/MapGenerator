@@ -2,39 +2,39 @@
 
 int main( int argc, char * *argv )
 {
-    world_map world;
+    WorldMap world;
 
     std::cout << "generating topography" << std::endl;
-    world.create_topography();
+    world.createTopography();
 
     /// freshwater functions
     std::cout << "generating bodies of fresh water" << std::endl;
-    world.create_precipitation();
-    world.create_sources();
-    world.clear_precipitation();
+    world.createPrecipitation();
+    world.createSources();
+    world.clearPrecipitation();
     std::cout << "generating precipitation" << std::endl;
-    world.create_precipitation();
+    world.createPrecipitation();
 
     std::cout << "generating temperatures" << std::endl;
-    world.create_temp();
+    world.createTemp();
 
     std::cout << "generating biomes" << std::endl;
-    world.set_biome();
+    world.setBiome();
 
     /// color the maps
-    world.color_topography();
-    world.color_temp();
-    world.color_precipitation();
-    world.color_biome( true );
+    world.colorTopography();
+    world.colorTemp();
+    world.colorPrecipitation();
+    world.colorBiome( true );
 
     for ( int i = 0; i < 3; i++ )
     {
-        world.average_biome_color();
+        world.averageBiomeColor();
     }
 
-    world.display_map();
+    world.displayMap();
 
-    world.find_max();
+    world.findMax();
 
     cv::waitKey( 0 );
 

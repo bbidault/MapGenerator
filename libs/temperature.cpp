@@ -1,7 +1,7 @@
 #include "world_map.h"
 #include "common.h"
 
-void world_map::create_temp()
+void WorldMap::createTemp()
 {
     for ( int i = 0; i < width; i++ )
     {
@@ -11,11 +11,11 @@ void world_map::create_temp()
             /// Tropic of Cancer
             if ( j <= height * ( 90 - AXIAL_TILT ) / 180 )
             {
-                world[i][j].Q3_temp = j * 40 / ( height * ( 90 - AXIAL_TILT ) / 180 );
+                world[i][j].q3Temp = j * 40 / ( height * ( 90 - AXIAL_TILT ) / 180 );
             }
             else
             {
-                world[i][j].Q3_temp = 40
+                world[i][j].q3Temp = 40
                     - ( j - height * ( 90 - AXIAL_TILT ) / 180 ) * 70
                     / ( height - height * ( 90 - AXIAL_TILT ) / 180 );
             }
@@ -23,42 +23,42 @@ void world_map::create_temp()
             /// Tropic of Capricorn
             if ( j <= height * ( 90 + AXIAL_TILT ) / 180 )
             {
-                world[i][j].Q1_temp = -30 + j * 70 / ( height * ( 90 + AXIAL_TILT ) / 180 );
+                world[i][j].q1Temp = -30 + j * 70 / ( height * ( 90 + AXIAL_TILT ) / 180 );
             }
             else
             {
-                world[i][j].Q1_temp = 40
+                world[i][j].q1Temp = 40
                     - ( j - height * ( 90 + AXIAL_TILT ) / 180 ) * 40
                     / ( height - height * ( 90 + AXIAL_TILT ) / 180 );
             }
 
-            world[i][j].Q2_Q4_temp = ( world[i][j].Q1_temp + world[i][j].Q3_temp ) / 2;
+            world[i][j].q2Q4Temp = ( world[i][j].q1Temp + world[i][j].q3Temp ) / 2;
 
             /// bodies of water are less affected by season,
             /// they work as thermal reservoirs
             if ( world[i][j].state != LAND )
             {
-                world[i][j].Q1_temp = ( world[i][j].Q1_temp + 9 * world[i][j].Q2_Q4_temp ) / 10;
-                world[i][j].Q3_temp = ( world[i][j].Q3_temp + 9 * world[i][j].Q2_Q4_temp ) / 10;
+                world[i][j].q1Temp = ( world[i][j].q1Temp + 9 * world[i][j].q2Q4Temp ) / 10;
+                world[i][j].q3Temp = ( world[i][j].q3Temp + 9 * world[i][j].q2Q4Temp ) / 10;
             }
 
             /// the temperature is effected by the altitude
             if ( world[i][j].altitude >= 0 )
             {
-                world[i][j].Q1_temp    -= world[i][j].altitude / 137;
-                world[i][j].Q3_temp    -= world[i][j].altitude / 137;
-                world[i][j].Q2_Q4_temp -= world[i][j].altitude / 137;
+                world[i][j].q1Temp   -= world[i][j].altitude / 137;
+                world[i][j].q3Temp   -= world[i][j].altitude / 137;
+                world[i][j].q2Q4Temp -= world[i][j].altitude / 137;
             }
         }
     }
 
     for ( int i = 0; i < 30; i++ )
     {
-        this->average_temperature();
+        this->averageTemperature();
     }
 }
 
-void world_map::average_temperature()
+void WorldMap::averageTemperature()
 {
     for ( int i = 1; i < width - 1; i++ )
     {
@@ -67,37 +67,37 @@ void world_map::average_temperature()
             /// land (soil) has a higher temperature dynamic than water
             if ( world[i][j].state == LAND )
             {
-                world[i][j].Q2_Q4_temp = ( ( world[i - 1][j - 1].Q2_Q4_temp
-                                             + world[i - 1][j + 1].Q2_Q4_temp ) / SQRT_2
-                                           + world[i - 1][j].Q2_Q4_temp + world[i][j - 1].Q2_Q4_temp
-                                           + world[i][j].Q2_Q4_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q2Q4Temp = ( ( world[i - 1][j - 1].q2Q4Temp
+                                           + world[i - 1][j + 1].q2Q4Temp ) / SQRT_2
+                                         + world[i - 1][j].q2Q4Temp + world[i][j - 1].q2Q4Temp
+                                         + world[i][j].q2Q4Temp * 2 ) / ( 4 + SQRT_2 );
 
-                world[i][j].Q1_temp = ( ( world[i - 1][j - 1].Q1_temp
-                                          + world[i - 1][j + 1].Q1_temp ) / SQRT_2
-                                        + world[i - 1][j].Q1_temp + world[i][j - 1].Q1_temp
-                                        + world[i][j].Q1_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q1Temp = ( ( world[i - 1][j - 1].q1Temp
+                                         + world[i - 1][j + 1].q1Temp ) / SQRT_2
+                                       + world[i - 1][j].q1Temp + world[i][j - 1].q1Temp
+                                       + world[i][j].q1Temp * 2 ) / ( 4 + SQRT_2 );
 
-                world[i][j].Q3_temp = ( ( world[i - 1][j - 1].Q3_temp
-                                          + world[i - 1][j + 1].Q3_temp ) / SQRT_2
-                                        + world[i - 1][j].Q3_temp + world[i][j - 1].Q3_temp
-                                        + world[i][j].Q3_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q3Temp = ( ( world[i - 1][j - 1].q3Temp
+                                         + world[i - 1][j + 1].q3Temp ) / SQRT_2
+                                       + world[i - 1][j].q3Temp + world[i][j - 1].q3Temp
+                                       + world[i][j].q3Temp * 2 ) / ( 4 + SQRT_2 );
             }
             else
             {
-                world[i][j].Q2_Q4_temp = ( ( world[i - 1][j - 1].Q2_Q4_temp
-                                             + world[i - 1][j + 1].Q2_Q4_temp ) / SQRT_2
-                                           + world[i - 1][j].Q2_Q4_temp + world[i][j - 1].Q2_Q4_temp
-                                           + world[i][j].Q2_Q4_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q2Q4Temp = ( ( world[i - 1][j - 1].q2Q4Temp
+                                           + world[i - 1][j + 1].q2Q4Temp ) / SQRT_2
+                                         + world[i - 1][j].q2Q4Temp + world[i][j - 1].q2Q4Temp
+                                         + world[i][j].q2Q4Temp * 20 ) / ( 22 + SQRT_2 );
 
-                world[i][j].Q1_temp = ( ( world[i - 1][j - 1].Q1_temp
-                                          + world[i - 1][j + 1].Q1_temp ) / SQRT_2
-                                        + world[i - 1][j].Q1_temp + world[i][j - 1].Q1_temp
-                                        + world[i][j].Q1_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q1Temp = ( ( world[i - 1][j - 1].q1Temp
+                                         + world[i - 1][j + 1].q1Temp ) / SQRT_2
+                                       + world[i - 1][j].q1Temp + world[i][j - 1].q1Temp
+                                       + world[i][j].q1Temp * 20 ) / ( 22 + SQRT_2 );
 
-                world[i][j].Q3_temp = ( ( world[i - 1][j - 1].Q3_temp
-                                          + world[i - 1][j + 1].Q3_temp ) / SQRT_2
-                                        + world[i - 1][j].Q3_temp + world[i][j - 1].Q3_temp
-                                        + world[i][j].Q3_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q3Temp = ( ( world[i - 1][j - 1].q3Temp
+                                         + world[i - 1][j + 1].q3Temp ) / SQRT_2
+                                       + world[i - 1][j].q3Temp + world[i][j - 1].q3Temp
+                                       + world[i][j].q3Temp * 20 ) / ( 22 + SQRT_2 );
             }
         }
     }
@@ -108,59 +108,59 @@ void world_map::average_temperature()
         {
             if ( world[i][j].state == LAND )
             {
-                world[i][j].Q2_Q4_temp = ( ( world[i + 1][j + 1].Q2_Q4_temp
-                                             + world[i + 1][j - 1].Q2_Q4_temp ) / SQRT_2
-                                           + world[i + 1][j].Q2_Q4_temp + world[i][j + 1].Q2_Q4_temp
-                                           + world[i][j].Q2_Q4_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q2Q4Temp = ( ( world[i + 1][j + 1].q2Q4Temp
+                                           + world[i + 1][j - 1].q2Q4Temp ) / SQRT_2
+                                         + world[i + 1][j].q2Q4Temp + world[i][j + 1].q2Q4Temp
+                                         + world[i][j].q2Q4Temp * 2 ) / ( 4 + SQRT_2 );
 
-                world[i][j].Q1_temp = ( ( world[i + 1][j + 1].Q1_temp
-                                          + world[i + 1][j - 1].Q1_temp ) / SQRT_2
-                                        + world[i + 1][j].Q1_temp + world[i][j + 1].Q1_temp
-                                        + world[i][j].Q1_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q1Temp = ( ( world[i + 1][j + 1].q1Temp
+                                         + world[i + 1][j - 1].q1Temp ) / SQRT_2
+                                       + world[i + 1][j].q1Temp + world[i][j + 1].q1Temp
+                                       + world[i][j].q1Temp * 2 ) / ( 4 + SQRT_2 );
 
-                world[i][j].Q3_temp = ( ( world[i + 1][j + 1].Q3_temp
-                                          + world[i + 1][j - 1].Q3_temp ) / SQRT_2
-                                        + world[i + 1][j].Q3_temp + world[i][j + 1].Q3_temp
-                                        + world[i][j].Q3_temp * 2 ) / ( 4 + SQRT_2 );
+                world[i][j].q3Temp = ( ( world[i + 1][j + 1].q3Temp
+                                         + world[i + 1][j - 1].q3Temp ) / SQRT_2
+                                       + world[i + 1][j].q3Temp + world[i][j + 1].q3Temp
+                                       + world[i][j].q3Temp * 2 ) / ( 4 + SQRT_2 );
             }
             else
             {
-                world[i][j].Q2_Q4_temp = ( ( world[i + 1][j + 1].Q2_Q4_temp
-                                             + world[i + 1][j - 1].Q2_Q4_temp ) / SQRT_2
-                                           + world[i + 1][j].Q2_Q4_temp + world[i][j + 1].Q2_Q4_temp
-                                           + world[i][j].Q2_Q4_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q2Q4Temp = ( ( world[i + 1][j + 1].q2Q4Temp
+                                           + world[i + 1][j - 1].q2Q4Temp ) / SQRT_2
+                                         + world[i + 1][j].q2Q4Temp + world[i][j + 1].q2Q4Temp
+                                         + world[i][j].q2Q4Temp * 20 ) / ( 22 + SQRT_2 );
 
-                world[i][j].Q1_temp = ( ( world[i + 1][j + 1].Q1_temp
-                                          + world[i + 1][j - 1].Q1_temp ) / SQRT_2
-                                        + world[i + 1][j].Q1_temp + world[i][j + 1].Q1_temp
-                                        + world[i][j].Q1_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q1Temp = ( ( world[i + 1][j + 1].q1Temp
+                                         + world[i + 1][j - 1].q1Temp ) / SQRT_2
+                                       + world[i + 1][j].q1Temp + world[i][j + 1].q1Temp
+                                       + world[i][j].q1Temp * 20 ) / ( 22 + SQRT_2 );
 
-                world[i][j].Q3_temp = ( ( world[i + 1][j + 1].Q3_temp
-                                          + world[i + 1][j - 1].Q3_temp ) / SQRT_2
-                                        + world[i + 1][j].Q3_temp + world[i][j + 1].Q3_temp
-                                        + world[i][j].Q3_temp * 20 ) / ( 22 + SQRT_2 );
+                world[i][j].q3Temp = ( ( world[i + 1][j + 1].q3Temp
+                                         + world[i + 1][j - 1].q3Temp ) / SQRT_2
+                                       + world[i + 1][j].q3Temp + world[i][j + 1].q3Temp
+                                       + world[i][j].q3Temp * 20 ) / ( 22 + SQRT_2 );
             }
         }
     }
 }
 
-void world_map::color_temp()
+void WorldMap::colorTemp()
 {
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            world[i][j].Q2_Q4_temp_color[0] = 127.5 - world[i][j].Q2_Q4_temp * 127.5 / 40;
-            world[i][j].Q2_Q4_temp_color[1] = 0;
-            world[i][j].Q2_Q4_temp_color[2] = 127.5 + world[i][j].Q2_Q4_temp * 127.5 / 40;
+            world[i][j].q2Q4TempColor[0] = 127.5 - world[i][j].q2Q4Temp * 127.5 / 40;
+            world[i][j].q2Q4TempColor[1] = 0;
+            world[i][j].q2Q4TempColor[2] = 127.5 + world[i][j].q2Q4Temp * 127.5 / 40;
 
-            world[i][j].Q1_temp_color[0] = 127.5 - world[i][j].Q1_temp * 127.5 / 40;
-            world[i][j].Q1_temp_color[1] = 0;
-            world[i][j].Q1_temp_color[2] = 127.5 + world[i][j].Q1_temp * 127.5 / 40;
+            world[i][j].q1TempColor[0] = 127.5 - world[i][j].q1Temp * 127.5 / 40;
+            world[i][j].q1TempColor[1] = 0;
+            world[i][j].q1TempColor[2] = 127.5 + world[i][j].q1Temp * 127.5 / 40;
 
-            world[i][j].Q3_temp_color[0] = 127.5 - world[i][j].Q3_temp * 127.5 / 40;
-            world[i][j].Q3_temp_color[1] = 0;
-            world[i][j].Q3_temp_color[2] = 127.5 + world[i][j].Q3_temp * 127.5 / 40;
+            world[i][j].q3TempColor[0] = 127.5 - world[i][j].q3Temp * 127.5 / 40;
+            world[i][j].q3TempColor[1] = 0;
+            world[i][j].q3TempColor[2] = 127.5 + world[i][j].q3Temp * 127.5 / 40;
         }
     }
 }

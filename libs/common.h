@@ -9,20 +9,20 @@
  * @param low margin
  * @param high margin
  */
-bool between( double x,
-              double a,
-              double b );
+bool between( double aX,
+              double aA,
+              double aB );
 
 /** return absolute value |a|
  *
  * @param a
  */
-int abs( int a );
+int abs( int aA );
 
 /** return x^y
  *
  * @param x
  * @param y
  */
-int pow( int x,
-         int y );
+int pow( int aX,
+         int aY );

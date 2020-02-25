@@ -1,83 +1,83 @@
 #include "world_map.h"
 #include "common.h"
 
-void world_map::display_map()
+void WorldMap::displayMap()
 {
-    cv::Mat topographic_map( height, width, CV_8UC3 );
+    cv::Mat topographicMap( height, width, CV_8UC3 );
 
-    cv::Mat Q2_Q4_temp_map( height, width, CV_8UC3 );
+    cv::Mat q2Q4TempMap( height, width, CV_8UC3 );
 
-    cv::Mat Q1_temp_map( height, width, CV_8UC3 );
+    cv::Mat q1TempMap( height, width, CV_8UC3 );
 
-    cv::Mat Q3_temp_map( height, width, CV_8UC3 );
+    cv::Mat q3TempMap( height, width, CV_8UC3 );
 
-    cv::Mat precipitation_map( height, width, CV_8UC3 );
+    cv::Mat precipitationMap( height, width, CV_8UC3 );
 
-    cv::Mat biome_map( height, width, CV_8UC3 );
+    cv::Mat biomeMap( height, width, CV_8UC3 );
 
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            topographic_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].topography_color;
+            topographicMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].topographyColor;
 
-            Q2_Q4_temp_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].Q2_Q4_temp_color;
+            q2Q4TempMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].q2Q4TempColor;
 
-            Q1_temp_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].Q1_temp_color;
+            q1TempMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].q1TempColor;
 
-            Q3_temp_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].Q3_temp_color;
+            q3TempMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].q3TempColor;
 
-            precipitation_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].precipitation_color;
+            precipitationMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].precipitationColor;
 
-            biome_map.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].biome_color;
+            biomeMap.at<cv::Vec3b>( cv::Point( i, j ) ) = world[i][j].biomeColor;
         }
     }
 
-    imshow( "Topographic map", topographic_map );
+    imshow( "Topographic map", topographicMap );
 
-    //    imshow("Q2 and Q4 temperature map", Q2_Q4_temp_map);
+    //    imshow("Q2 and Q4 temperature map", q2Q4TempMap);
     //
-    //    imshow("Q1 temperature map", Q1_temp_map);
+    //    imshow("Q1 temperature map", q1TempMap);
     //
-    //    imshow("Q3 temperature map", Q3_temp_map);
+    //    imshow("Q3 temperature map", q3TempMap);
     //
-    //    imshow("Precipitation map", precipitation_map);
+    //    imshow("Precipitation map", precipitationMap);
 
-    imshow( "Biomes map", biome_map );
+    imshow( "Biomes map", biomeMap );
 }
 
-void world_map::find_max()
+void WorldMap::findMax()
 {
-    double max_altitude      = 0;
-    double min_temp          = 1000;
-    double max_temp          = -1000;
-    double max_precipitation = 0;
+    double maxAltitude      = 0;
+    double minTemp          = 1000;
+    double maxTemp          = -1000;
+    double maxPrecipitation = 0;
 
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            if ( world[i][j].altitude > max_altitude )
+            if ( world[i][j].altitude > maxAltitude )
             {
-                max_altitude = world[i][j].altitude;
+                maxAltitude = world[i][j].altitude;
             }
-            if ( world[i][j].Q2_Q4_temp > max_temp )
+            if ( world[i][j].q2Q4Temp > maxTemp )
             {
-                max_temp = world[i][j].Q2_Q4_temp;
+                maxTemp = world[i][j].q2Q4Temp;
             }
-            if ( world[i][j].Q2_Q4_temp < min_temp )
+            if ( world[i][j].q2Q4Temp < minTemp )
             {
-                min_temp = world[i][j].Q2_Q4_temp;
+                minTemp = world[i][j].q2Q4Temp;
             }
-            if ( world[i][j].precipitation > max_precipitation )
+            if ( world[i][j].precipitation > maxPrecipitation )
             {
-                max_precipitation = world[i][j].precipitation;
+                maxPrecipitation = world[i][j].precipitation;
             }
         }
     }
 
-    std::cout << "max altitude : " << max_altitude << std::endl;
-    std::cout << "max temperature : " << max_temp << std::endl;
-    std::cout << "min temperature : " << min_temp << std::endl;
-    std::cout << "max precipitation : " << max_precipitation << std::endl;
+    std::cout << "max altitude : " << maxAltitude << std::endl;
+    std::cout << "max temperature : " << maxTemp << std::endl;
+    std::cout << "min temperature : " << minTemp << std::endl;
+    std::cout << "max precipitation : " << maxPrecipitation << std::endl;
 }

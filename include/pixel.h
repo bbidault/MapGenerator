@@ -5,14 +5,15 @@
 #define SEA_FLOOR -2000
 
 /// coordinates of a certain pixel
-struct pixel_coordinates
+//typedef std::pair<int, int> PixelCoordinates_T; // TODO
+typedef struct
 {
     int row;
     int col;
-};
+}PixelCoordinates_T;
 
 /// list of pixel states
-enum pixel_state
+typedef enum
 {
     NO_STATE = 0,
     SEA,
@@ -23,10 +24,10 @@ enum pixel_state
     CITY,
     ROAD,
     RAILWAY,
-};
+}PixelState_T;
 
 /// list of biomes
-enum pixel_biome
+typedef enum
 {
     NO_BIOME = 0,
     POLAR_DESERT,
@@ -47,57 +48,57 @@ enum pixel_biome
     SUBTROPICAL_DRY_FOREST,
     MONSOON_FOREST,
     TROPICAL_RAINFOREST,
-};
+}PixelBiome_T;
 
-/// pixel class definition : one element of the global map
-class pixel
+/// Pixel class definition : one element of the global map
+class Pixel
 {
     public:
-        cv::Vec3b topography_color;
-        cv::Vec3b Q2_Q4_temp_color;
-        cv::Vec3b Q1_temp_color;
-        cv::Vec3b Q3_temp_color;
-        cv::Vec3b precipitation_color;
-        cv::Vec3i biome_color;
+        cv::Vec3b topographyColor;
+        cv::Vec3b q2Q4TempColor;
+        cv::Vec3b q1TempColor;
+        cv::Vec3b q3TempColor;
+        cv::Vec3b precipitationColor;
+        cv::Vec3i biomeColor;
         double altitude;
-        double Q2_Q4_temp;
-        double Q1_temp;
-        double Q3_temp;
+        double q2Q4Temp;
+        double q1Temp;
+        double q3Temp;
         double precipitation;
-        pixel_state state;
-        bool pixel_visited;
-        bool sea_connected;
-        pixel_biome biome;
+        PixelState_T state;
+        bool pixelVisited;
+        bool seaConnected;
+        PixelBiome_T biome;
 
         /// constructor
-        pixel()
+        Pixel()
         {
-            topography_color[0]    = 0;
-            topography_color[1]    = 0;
-            topography_color[2]    = 0;
-            Q2_Q4_temp_color[0]    = 0;
-            Q2_Q4_temp_color[1]    = 0;
-            Q2_Q4_temp_color[2]    = 0;
-            Q1_temp_color[0]       = 0;
-            Q1_temp_color[1]       = 0;
-            Q1_temp_color[2]       = 0;
-            Q3_temp_color[0]       = 0;
-            Q3_temp_color[1]       = 0;
-            Q3_temp_color[2]       = 0;
-            precipitation_color[0] = 0;
-            precipitation_color[1] = 0;
-            precipitation_color[2] = 0;
-            biome_color[0]         = 0;
-            biome_color[1]         = 0;
-            biome_color[2]         = 0;
-            altitude               = SEA_FLOOR;
-            Q2_Q4_temp             = 0;
-            Q1_temp                = 0;
-            Q3_temp                = 0;
-            precipitation          = 0;
-            state                  = NO_STATE;
-            pixel_visited          = false;
-            sea_connected          = false;
-            biome                  = NO_BIOME;
+            topographyColor[0]    = 0;
+            topographyColor[1]    = 0;
+            topographyColor[2]    = 0;
+            q2Q4TempColor[0]      = 0;
+            q2Q4TempColor[1]      = 0;
+            q2Q4TempColor[2]      = 0;
+            q1TempColor[0]        = 0;
+            q1TempColor[1]        = 0;
+            q1TempColor[2]        = 0;
+            q3TempColor[0]        = 0;
+            q3TempColor[1]        = 0;
+            q3TempColor[2]        = 0;
+            precipitationColor[0] = 0;
+            precipitationColor[1] = 0;
+            precipitationColor[2] = 0;
+            biomeColor[0]         = 0;
+            biomeColor[1]         = 0;
+            biomeColor[2]         = 0;
+            altitude              = SEA_FLOOR;
+            q2Q4Temp              = 0;
+            q1Temp                = 0;
+            q3Temp                = 0;
+            precipitation         = 0;
+            state                 = NO_STATE;
+            pixelVisited          = false;
+            seaConnected          = false;
+            biome                 = NO_BIOME;
         }
 };

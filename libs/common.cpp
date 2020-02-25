@@ -1,8 +1,8 @@
 #include "common.h"
 
-bool between( double x, double a, double b )
+bool between( double aX, double aA, double aB )
 {
-    if ( ( x >= a ) && ( x < b ) )
+    if ( ( aX >= aA ) && ( aX < aB ) )
     {
         return true;
     }
@@ -12,25 +12,25 @@ bool between( double x, double a, double b )
     }
 }
 
-int abs( int a )
+int abs( int aA )
 {
-    if ( a >= 0 )
+    if ( aA >= 0 )
     {
-        return a;
+        return aA;
     }
     else
     {
-        return -a;
+        return -aA;
     }
 }
 
-int pow( int x, int y )
+int pow( int aX, int aY )
 {
     int k = 1;
 
-    for ( int i = 0; i < y; i++ )
+    for ( int i = 0; i < aY; i++ )
     {
-        k *= x;
+        k *= aX;
     }
 
     return k;
