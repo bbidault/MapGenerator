@@ -1,8 +1,14 @@
 #include "common.h"
 
-bool between( double aX, double aA, double aB )
+/** test if a value x is between two margins
+ *
+ * @param aX number to test
+ * @param aLowMargin low margin
+ * @param aHighMargin high margin
+ */
+bool between( double aX, double aLowMargin, double aHighMargin )
 {
-    if ( ( aX >= aA ) && ( aX < aB ) )
+    if ( ( aX >= aLowMargin ) && ( aX < aHighMargin ) )
     {
         return true;
     }
@@ -12,6 +18,10 @@ bool between( double aX, double aA, double aB )
     }
 }
 
+/** return absolute value |aA|
+ *
+ * @param aA
+ */
 int abs( int aA )
 {
     if ( aA >= 0 )
@@ -24,6 +34,11 @@ int abs( int aA )
     }
 }
 
+/** return aX^aY
+ *
+ * @param aX
+ * @param aY
+ */
 int pow( int aX, int aY )
 {
     int k = 1;

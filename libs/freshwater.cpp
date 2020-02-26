@@ -1,6 +1,9 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief initializes seas, lakes and lands status
+ */
 void WorldMap::setSeasLakesLands()
 {
     this->visitSea( 0, 0, 0 );
@@ -23,6 +26,13 @@ void WorldMap::setSeasLakesLands()
     this->setLakesLands();
 }
 
+/**
+ * @brief set sea status
+ *
+ * @param i latitute of next pixel
+ * @param j longitude of next pixel
+ * @param k the number of visited pixels so far
+ */
 void WorldMap::visitSea( int i, int j, int k )
 {
     world[i][j].pixelVisited = true;
@@ -64,6 +74,9 @@ void WorldMap::visitSea( int i, int j, int k )
     k--;
 }
 
+/**
+ * @brief set lake and land status
+ */
 void WorldMap::setLakesLands()
 {
     for ( int i = 0; i < width; i++ )
@@ -82,6 +95,9 @@ void WorldMap::setLakesLands()
     }
 }
 
+/**
+ * @brief generate sources in locations of high precipitation
+ */
 void WorldMap::createSources()
 {
     srand( time( NULL ) );
@@ -105,6 +121,12 @@ void WorldMap::createSources()
     }
 }
 
+/**
+ * @brief generate a river from source
+ *
+ * @param i latitude of the source
+ * @param j longitude of the source
+ */
 void WorldMap::generateRiver( int i, int j )
 {
     double lowest = world[i][j].altitude;
@@ -154,6 +176,12 @@ void WorldMap::generateRiver( int i, int j )
     }
 }
 
+/**
+ * @brief update rivers and lakes connection status
+ *
+ * @param i latitude of the source
+ * @param j longitude of the source
+ */
 void WorldMap::setConnection( int i, int j )
 {
     for ( int k = 0; k < 3; k++ )
@@ -171,20 +199,26 @@ void WorldMap::setConnection( int i, int j )
     }
 }
 
+/**
+ * @brief generate a lake from a river
+ *
+ * @param i latitude of the source
+ * @param j longitude of the source
+ */
 void WorldMap::generateLake( int i, int j )
 {
     bool   buildingLake = true;
     double lowest       = 10000;
 
-    /// sub-lake studied
+    // sub-lake studied
     int col = i;
     int row = j;
 
-    /// next addition to the total lake
+    // next addition to the total lake
     int nextRow = i;
     int nextCol = j;
 
-    /// total lake
+    // total lake
     std::vector<PixelCoordinates_T> currentLake;
 
     PixelCoordinates_T newLake;
@@ -209,13 +243,13 @@ void WorldMap::generateLake( int i, int j )
     {
         lowest = 10000;
 
-        /// for each sub-lake
+        // for each sub-lake
         for ( int k = 0; k < currentLake.size(); k++ )
         {
             row = currentLake[k].row;
             col = currentLake[k].col;
 
-            /// if the lake overflows
+            // if the lake overflows
             if ( ( world[row + 1][col].altitude < world[row][col].altitude ) &&
                  ( world[row + 1][col].state != LAKE ) &&
                  ( world[row + 1][col].state != RIVER ) )
@@ -295,7 +329,14 @@ void WorldMap::generateLake( int i, int j )
     }
 }
 
-void WorldMap::visitLake( int i, int j, std::vector<PixelCoordinates_T> &lake )
+/**
+ * @brief create a vector listing all the pixels of a lake
+ *
+ * @param i latitude of the lake
+ * @param j longitude of the lake
+ * @param aLake total lake
+ */
+void WorldMap::visitLake( int i, int j, std::vector<PixelCoordinates_T> &aLake )
 {
     world[i][j].pixelVisited = true;
     PixelCoordinates_T newLake;
@@ -304,28 +345,28 @@ void WorldMap::visitLake( int i, int j, std::vector<PixelCoordinates_T> &lake )
     {
         newLake.row = i + 1;
         newLake.col = j;
-        lake.push_back( newLake );
-        this->visitLake( i + 1, j, lake );
+        aLake.push_back( newLake );
+        this->visitLake( i + 1, j, aLake );
     }
     if ( ( world[i - 1][j].state == LAKE ) && !world[i - 1][j].pixelVisited )
     {
         newLake.row = i - 1;
         newLake.col = j;
-        lake.push_back( newLake );
-        this->visitLake( i - 1, j, lake );
+        aLake.push_back( newLake );
+        this->visitLake( i - 1, j, aLake );
     }
     if ( ( world[i][j + 1].state == LAKE ) && !world[i][j + 1].pixelVisited )
     {
         newLake.row = i;
         newLake.col = j + 1;
-        lake.push_back( newLake );
-        this->visitLake( i, j + 1, lake );
+        aLake.push_back( newLake );
+        this->visitLake( i, j + 1, aLake );
     }
     if ( ( world[i][j - 1].state == LAKE ) && !world[i][j - 1].pixelVisited )
     {
         newLake.row = i;
         newLake.col = j - 1;
-        lake.push_back( newLake );
-        this->visitLake( i, j - 1, lake );
+        aLake.push_back( newLake );
+        this->visitLake( i, j - 1, aLake );
     }
 }

@@ -1,6 +1,9 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief display topographic, temperature and precipitation maps
+ */
 void WorldMap::displayMap()
 {
     cv::Mat topographicMap( height, width, CV_8UC3 );
@@ -46,6 +49,9 @@ void WorldMap::displayMap()
     imshow( "Biomes map", biomeMap );
 }
 
+/**
+ * @brief display max max altitude, max and min temperature and max precipitation
+ */
 void WorldMap::findMax()
 {
     double maxAltitude      = 0;

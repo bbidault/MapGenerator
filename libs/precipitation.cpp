@@ -1,6 +1,9 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief clear precipitation values
+ */
 void WorldMap::clearPrecipitation()
 {
     for ( int i = 0; i < width; i++ )
@@ -12,18 +15,21 @@ void WorldMap::clearPrecipitation()
     }
 }
 
+/**
+ * @brief generate precipitation map from water mass locations and air currents
+ */
 void WorldMap::createPrecipitation()
 {
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            /// clouds form over lakes and seas
+            // clouds form over lakes and seas
             if ( ( world[i][j].state == SEA ) || ( world[i][j].state == LAKE ) )
             {
                 world[i][j].precipitation += 1000;
 
-                /// if north of the northern Horse latitude
+                // if north of the northern Horse latitude
                 if ( j < height / 3 )
                 {
                     for ( int k = 0; k < 18; k++ )
@@ -49,7 +55,7 @@ void WorldMap::createPrecipitation()
                         }
                     }
                 }
-                /// if between the Horse latitudes
+                // if between the Horse latitudes
                 else if ( between( j, height / 3, height * 2 / 3 ) )
                 {
                     for ( int k = 0; k < 18; k++ )
@@ -75,7 +81,7 @@ void WorldMap::createPrecipitation()
                         }
                     }
                 }
-                /// if south of southern Horse latitude
+                // if south of southern Horse latitude
                 else
                 {
                     for ( int k = 0; k < 18; k++ )
@@ -115,6 +121,9 @@ void WorldMap::createPrecipitation()
     }
 }
 
+/**
+ * @brief average precipitation across the map
+ */
 void WorldMap::averagePrecipitation()
 {
     for ( int i = 1; i < width - 1; i++ )
@@ -138,6 +147,9 @@ void WorldMap::averagePrecipitation()
     }
 }
 
+/**
+ * @brief color precipitation map
+ */
 void WorldMap::colorPrecipitation()
 {
     for ( int i = 0; i < width; i++ )

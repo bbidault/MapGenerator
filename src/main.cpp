@@ -7,7 +7,7 @@ int main( int argc, char * *argv )
     std::cout << "generating topography" << std::endl;
     world.createTopography();
 
-    /// freshwater functions
+    // freshwater functions
     std::cout << "generating bodies of fresh water" << std::endl;
     world.createPrecipitation();
     world.createSources();
@@ -21,7 +21,7 @@ int main( int argc, char * *argv )
     std::cout << "generating biomes" << std::endl;
     world.setBiome();
 
-    /// color the maps
+    // color the maps
     world.colorTopography();
     world.colorTemp();
     world.colorPrecipitation();

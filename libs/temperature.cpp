@@ -1,14 +1,17 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief generate temperature map from longitude and altitude
+ */
 void WorldMap::createTemp()
 {
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            /// the temperature is affected by the latitude
-            /// Tropic of Cancer
+            // the temperature is affected by the latitude
+            // Tropic of Cancer
             if ( j <= height * ( 90 - AXIAL_TILT ) / 180 )
             {
                 world[i][j].q3Temp = j * 40 / ( height * ( 90 - AXIAL_TILT ) / 180 );
@@ -20,7 +23,7 @@ void WorldMap::createTemp()
                     / ( height - height * ( 90 - AXIAL_TILT ) / 180 );
             }
 
-            /// Tropic of Capricorn
+            // Tropic of Capricorn
             if ( j <= height * ( 90 + AXIAL_TILT ) / 180 )
             {
                 world[i][j].q1Temp = -30 + j * 70 / ( height * ( 90 + AXIAL_TILT ) / 180 );
@@ -34,15 +37,15 @@ void WorldMap::createTemp()
 
             world[i][j].q2Q4Temp = ( world[i][j].q1Temp + world[i][j].q3Temp ) / 2;
 
-            /// bodies of water are less affected by season,
-            /// they work as thermal reservoirs
+            // bodies of water are less affected by season,
+            // they work as thermal reservoirs
             if ( world[i][j].state != LAND )
             {
                 world[i][j].q1Temp = ( world[i][j].q1Temp + 9 * world[i][j].q2Q4Temp ) / 10;
                 world[i][j].q3Temp = ( world[i][j].q3Temp + 9 * world[i][j].q2Q4Temp ) / 10;
             }
 
-            /// the temperature is effected by the altitude
+            // the temperature is effected by the altitude
             if ( world[i][j].altitude >= 0 )
             {
                 world[i][j].q1Temp   -= world[i][j].altitude / 137;
@@ -58,13 +61,16 @@ void WorldMap::createTemp()
     }
 }
 
+/**
+ * @brief average temperature across the map
+ */
 void WorldMap::averageTemperature()
 {
     for ( int i = 1; i < width - 1; i++ )
     {
         for ( int j = 1; j < height - 1; j++ )
         {
-            /// land (soil) has a higher temperature dynamic than water
+            // land (soil) has a higher temperature dynamic than water
             if ( world[i][j].state == LAND )
             {
                 world[i][j].q2Q4Temp = ( ( world[i - 1][j - 1].q2Q4Temp
@@ -144,6 +150,9 @@ void WorldMap::averageTemperature()
     }
 }
 
+/**
+ * @brief color temperature map
+ */
 void WorldMap::colorTemp()
 {
     for ( int i = 0; i < width; i++ )

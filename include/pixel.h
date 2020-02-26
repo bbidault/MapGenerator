@@ -1,10 +1,13 @@
 #include "stdio.h"
 #include "opencv2/opencv.hpp"
 
-/// sea floor altitude
+#ifndef PIXEL_H
+#define PIXEL_H
+
+// sea floor altitude
 #define SEA_FLOOR -2000
 
-/// coordinates of a certain pixel
+// coordinates of a certain pixel
 //typedef std::pair<int, int> PixelCoordinates_T; // TODO
 typedef struct
 {
@@ -12,7 +15,7 @@ typedef struct
     int col;
 }PixelCoordinates_T;
 
-/// list of pixel states
+// list of pixel states
 typedef enum
 {
     NO_STATE = 0,
@@ -26,7 +29,7 @@ typedef enum
     RAILWAY,
 }PixelState_T;
 
-/// list of biomes
+// list of biomes
 typedef enum
 {
     NO_BIOME = 0,
@@ -50,7 +53,7 @@ typedef enum
     TROPICAL_RAINFOREST,
 }PixelBiome_T;
 
-/// Pixel class definition : one element of the global map
+// Pixel class definition : one element of the global map
 class Pixel
 {
     public:
@@ -70,7 +73,7 @@ class Pixel
         bool seaConnected;
         PixelBiome_T biome;
 
-        /// constructor
+        // constructor
         Pixel()
         {
             topographyColor[0]    = 0;
@@ -102,3 +105,5 @@ class Pixel
             biome                 = NO_BIOME;
         }
 };
+
+#endif // PIXEL_H

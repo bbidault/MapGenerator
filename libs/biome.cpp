@@ -1,6 +1,9 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief evaluate pixel biome from temperature and precipitation
+ */
 void WorldMap::setBiome()
 {
     for ( int i = 0; i < width; i++ )
@@ -115,6 +118,11 @@ void WorldMap::setBiome()
     }
 }
 
+/**
+ * @brief color biome map
+ *
+ * @param aRealist whether the set of displayed color should be realistic or shematic
+ */
 void WorldMap::colorBiome( bool aRealist )
 {
     for ( int i = 0; i < width; i++ )
@@ -245,6 +253,9 @@ void WorldMap::colorBiome( bool aRealist )
     }
 }
 
+/**
+ * @brief average biome color map
+ */
 void WorldMap::averageBiomeColor()
 {
     for ( int i = 1; i < width - 1; i++ )

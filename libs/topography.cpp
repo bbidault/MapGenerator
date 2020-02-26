@@ -1,6 +1,9 @@
 #include "world_map.h"
 #include "common.h"
 
+/**
+ * @brief generate the map topography
+ */
 void WorldMap::createTopography()
 {
     this->randomizeAltitude( 1800 );
@@ -27,7 +30,12 @@ void WorldMap::createTopography()
     this->setSeasLakesLands();
 }
 
-void WorldMap::randomizeAltitude( int prob )
+/**
+ * @brief generates random high points on the map
+ *
+ * @param aProb probability of altitude > 0
+ */
+void WorldMap::randomizeAltitude( int aProb )
 {
     srand( time( NULL ) );
 
@@ -35,7 +43,7 @@ void WorldMap::randomizeAltitude( int prob )
     {
         for ( int j = height / 10; j < height - height / 10; j++ )
         {
-            int k = rand() % prob;
+            int k = rand() % aProb;
             int l = rand() % 13;
 
             if ( k == 0 )
@@ -46,9 +54,11 @@ void WorldMap::randomizeAltitude( int prob )
     }
 }
 
+/**
+ * @brief dilate points of altitude > 0
+ */
 void WorldMap::dilation()
 {
-    //WorldMap worldCopy; // TODO: replace
     Pixel * *worldCopy = new Pixel *[width];
     for ( int i = 0; i < width; i++ )
     {
@@ -99,12 +109,20 @@ void WorldMap::dilation()
         }
     }
 
-    world = worldCopy; // TODO: assignement operator
+    for ( int i = 0; i < width; i++ )
+    {
+        delete[] world[i];
+    }
+    delete[] world;
+
+    world = worldCopy;
 }
 
+/**
+ * @brief erode points of altitude > 0
+ */
 void WorldMap::erosion()
 {
-    //WorldMap worldCopy; // TODO: replace
     Pixel * *worldCopy = new Pixel *[width];
     for ( int i = 0; i < width; i++ )
     {
@@ -131,9 +149,18 @@ void WorldMap::erosion()
         }
     }
 
-    world = worldCopy; // TODO:assignement operator
+    for ( int i = 0; i < width; i++ )
+    {
+        delete[] world[i];
+    }
+    delete[] world;
+
+    world = worldCopy;
 }
 
+/**
+ * @brief average altitude across the map
+ */
 void WorldMap::averageAltitude()
 {
     for ( int i = 1; i < width - 1; i++ )
@@ -157,7 +184,13 @@ void WorldMap::averageAltitude()
     }
 }
 
-void WorldMap::createIrregularities( int prob, int size )
+/**
+ * @brief create random altutude irregularities
+ *
+ * @param aProb probability of irregularity
+ * @param aSize of irregularity
+ */
+void WorldMap::createIrregularities( int aProb, int aSize )
 {
     srand( time( NULL ) );
 
@@ -165,11 +198,11 @@ void WorldMap::createIrregularities( int prob, int size )
     {
         for ( int j = 1; j < height - 1; j++ )
         {
-            int k = rand() % prob;
+            int k = rand() % aProb;
 
             if ( k == 0 )
             {
-                int l = rand() % size - size / 2;
+                int l = rand() % aSize - aSize / 2;
 
                 world[i][j].altitude += l;
             }
@@ -177,6 +210,9 @@ void WorldMap::createIrregularities( int prob, int size )
     }
 }
 
+/**
+ * @brief color topographic map
+ */
 void WorldMap::colorTopography()
 {
     for ( int i = 1; i < width - 1; i++ )
