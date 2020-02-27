@@ -227,177 +227,119 @@ void WorldMap::colorTopography()
                      ( world[i][j + 1].altitude > 0 ) ||
                      ( world[i][j - 1].altitude > 0 ) ) ) )
             {
-                world[i][j].topographyColor[0] = 171;
-                world[i][j].topographyColor[1] = 120;
-                world[i][j].topographyColor[2] = 9;
+                world[i][j].topographyColor = TopographyColors::Altitude0;
             }
             else if ( world[i][j].altitude < -1800 )
             {
-                world[i][j].topographyColor[0] = 216;
-                world[i][j].topographyColor[1] = 171;
-                world[i][j].topographyColor[2] = 113;
+                world[i][j].topographyColor = TopographyColors::Altitude1;
             }
             else if ( between( world[i][j].altitude, -1800, -1600 ) )
             {
-                world[i][j].topographyColor[0] = 222;
-                world[i][j].topographyColor[1] = 178;
-                world[i][j].topographyColor[2] = 121;
+                world[i][j].topographyColor = TopographyColors::Altitude2;
             }
             else if ( between( world[i][j].altitude, -1600, -1400 ) )
             {
-                world[i][j].topographyColor[0] = 227;
-                world[i][j].topographyColor[1] = 185;
-                world[i][j].topographyColor[2] = 132;
+                world[i][j].topographyColor = TopographyColors::Altitude3;
             }
             else if ( between( world[i][j].altitude, -1400, -1200 ) )
             {
-                world[i][j].topographyColor[0] = 234;
-                world[i][j].topographyColor[1] = 193;
-                world[i][j].topographyColor[2] = 141;
+                world[i][j].topographyColor = TopographyColors::Altitude4;
             }
             else if ( between( world[i][j].altitude, -1200, -1000 ) )
             {
-                world[i][j].topographyColor[0] = 240;
-                world[i][j].topographyColor[1] = 201;
-                world[i][j].topographyColor[2] = 150;
+                world[i][j].topographyColor = TopographyColors::Altitude5;
             }
             else if ( between( world[i][j].altitude, -1000, -800 ) )
             {
-                world[i][j].topographyColor[0] = 247;
-                world[i][j].topographyColor[1] = 210;
-                world[i][j].topographyColor[2] = 161;
+                world[i][j].topographyColor = TopographyColors::Altitude6;
             }
             else if ( between( world[i][j].altitude, -800, -600 ) )
             {
-                world[i][j].topographyColor[0] = 251;
-                world[i][j].topographyColor[1] = 219;
-                world[i][j].topographyColor[2] = 172;
+                world[i][j].topographyColor = TopographyColors::Altitude7;
             }
             else if ( between( world[i][j].altitude, -600, -400 ) )
             {
-                world[i][j].topographyColor[0] = 255;
-                world[i][j].topographyColor[1] = 227;
-                world[i][j].topographyColor[2] = 185;
+                world[i][j].topographyColor = TopographyColors::Altitude8;
             }
             else if ( between( world[i][j].altitude, -400, -200 ) )
             {
-                world[i][j].topographyColor[0] = 255;
-                world[i][j].topographyColor[1] = 236;
-                world[i][j].topographyColor[2] = 198;
+                world[i][j].topographyColor = TopographyColors::Altitude9;
             }
             else if ( between( world[i][j].altitude, -200, 0 ) )
             {
-                world[i][j].topographyColor[0] = 254;
-                world[i][j].topographyColor[1] = 242;
-                world[i][j].topographyColor[2] = 216;
+                world[i][j].topographyColor = TopographyColors::Altitude10;
             }
             else if ( between( world[i][j].altitude, 0, 200 ) )
             {
-                world[i][j].topographyColor[0] = 165;
-                world[i][j].topographyColor[1] = 208;
-                world[i][j].topographyColor[2] = 172;
+                world[i][j].topographyColor = TopographyColors::Altitude11;
             }
             else if ( between( world[i][j].altitude, 200, 400 ) )
             {
-                world[i][j].topographyColor[0] = 139;
-                world[i][j].topographyColor[1] = 191;
-                world[i][j].topographyColor[2] = 148;
+                world[i][j].topographyColor = TopographyColors::Altitude12;
             }
             else if ( between( world[i][j].altitude, 400, 600 ) )
             {
-                world[i][j].topographyColor[0] = 143;
-                world[i][j].topographyColor[1] = 198;
-                world[i][j].topographyColor[2] = 168;
+                world[i][j].topographyColor = TopographyColors::Altitude13;
             }
             else if ( between( world[i][j].altitude, 600, 800 ) )
             {
-                world[i][j].topographyColor[0] = 150;
-                world[i][j].topographyColor[1] = 204;
-                world[i][j].topographyColor[2] = 189;
+                world[i][j].topographyColor = TopographyColors::Altitude14;
             }
             else if ( between( world[i][j].altitude, 800, 1000 ) )
             {
-                world[i][j].topographyColor[0] = 171;
-                world[i][j].topographyColor[1] = 215;
-                world[i][j].topographyColor[2] = 209;
+                world[i][j].topographyColor = TopographyColors::Altitude15;
             }
             else if ( between( world[i][j].altitude, 1000, 1200 ) )
             {
-                world[i][j].topographyColor[0] = 181;
-                world[i][j].topographyColor[1] = 228;
-                world[i][j].topographyColor[2] = 225;
+                world[i][j].topographyColor = TopographyColors::Altitude16;
             }
             else if ( between( world[i][j].altitude, 1200, 1400 ) )
             {
-                world[i][j].topographyColor[0] = 192;
-                world[i][j].topographyColor[1] = 235;
-                world[i][j].topographyColor[2] = 239;
+                world[i][j].topographyColor = TopographyColors::Altitude17;
             }
             else if ( between( world[i][j].altitude, 1400, 1600 ) )
             {
-                world[i][j].topographyColor[0] = 163;
-                world[i][j].topographyColor[1] = 214;
-                world[i][j].topographyColor[2] = 222;
+                world[i][j].topographyColor = TopographyColors::Altitude18;
             }
             else if ( between( world[i][j].altitude, 1600, 1800 ) )
             {
-                world[i][j].topographyColor[0] = 157;
-                world[i][j].topographyColor[1] = 202;
-                world[i][j].topographyColor[2] = 211;
+                world[i][j].topographyColor = TopographyColors::Altitude19;
             }
             else if ( between( world[i][j].altitude, 1800, 2000 ) )
             {
-                world[i][j].topographyColor[0] = 130;
-                world[i][j].topographyColor[1] = 185;
-                world[i][j].topographyColor[2] = 202;
+                world[i][j].topographyColor = TopographyColors::Altitude20;
             }
             else if ( between( world[i][j].altitude, 2000, 2200 ) )
             {
-                world[i][j].topographyColor[0] = 107;
-                world[i][j].topographyColor[1] = 167;
-                world[i][j].topographyColor[2] = 195;
+                world[i][j].topographyColor = TopographyColors::Altitude21;
             }
             else if ( between( world[i][j].altitude, 2200, 2400 ) )
             {
-                world[i][j].topographyColor[0] = 90;
-                world[i][j].topographyColor[1] = 152;
-                world[i][j].topographyColor[2] = 185;
+                world[i][j].topographyColor = TopographyColors::Altitude22;
             }
             else if ( between( world[i][j].altitude, 2400, 2600 ) )
             {
-                world[i][j].topographyColor[0] = 83;
-                world[i][j].topographyColor[1] = 135;
-                world[i][j].topographyColor[2] = 170;
+                world[i][j].topographyColor = TopographyColors::Altitude23;
             }
             else if ( between( world[i][j].altitude, 2600, 2800 ) )
             {
-                world[i][j].topographyColor[0] = 124;
-                world[i][j].topographyColor[1] = 154;
-                world[i][j].topographyColor[2] = 172;
+                world[i][j].topographyColor = TopographyColors::Altitude24;
             }
             else if ( between( world[i][j].altitude, 2800, 3000 ) )
             {
-                world[i][j].topographyColor[0] = 154;
-                world[i][j].topographyColor[1] = 174;
-                world[i][j].topographyColor[2] = 186;
+                world[i][j].topographyColor = TopographyColors::Altitude25;
             }
             else if ( between( world[i][j].altitude, 3000, 3200 ) )
             {
-                world[i][j].topographyColor[0] = 184;
-                world[i][j].topographyColor[1] = 195;
-                world[i][j].topographyColor[2] = 202;
+                world[i][j].topographyColor = TopographyColors::Altitude26;
             }
             else if ( between( world[i][j].altitude, 3200, 3400 ) )
             {
-                world[i][j].topographyColor[0] = 216;
-                world[i][j].topographyColor[1] = 222;
-                world[i][j].topographyColor[2] = 224;
+                world[i][j].topographyColor = TopographyColors::Altitude27;
             }
             else if ( world[i][j].altitude > 3400 )
             {
-                world[i][j].topographyColor[0] = 242;
-                world[i][j].topographyColor[1] = 244;
-                world[i][j].topographyColor[2] = 245;
+                world[i][j].topographyColor = TopographyColors::Altitude28;
             }
         }
     }
