@@ -35,8 +35,8 @@ void WorldMap::createPrecipitation()
                     for ( int k = 0; k < 18; k++ )
                     {
                         int l   = 1;
-                        int max = width / 6 - abs( ( j * width * 6 ) / ( 6 * height ) - width / 6 )
-                            + width / 5 - abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
+                        int max = width / 6 - std::abs( ( j * width * 6 ) / ( 6 * height ) - width / 6 )
+                            + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
                         if ( ( i + l ) < ( width - 1 ) )
                         {
@@ -61,8 +61,8 @@ void WorldMap::createPrecipitation()
                     for ( int k = 0; k < 18; k++ )
                     {
                         int l   = 1;
-                        int max = width / 6 - abs( ( ( j - height / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
-                            + width / 5 - abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
+                        int max = width / 6 - std::abs( ( ( j - height / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
+                            + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
                         if ( ( i - l ) > 0 )
                         {
@@ -87,8 +87,8 @@ void WorldMap::createPrecipitation()
                     for ( int k = 0; k < 18; k++ )
                     {
                         int l   = 1;
-                        int max = width / 6 - abs( ( ( j - height * 2 / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
-                            + width / 5 - abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
+                        int max = width / 6 - std::abs( ( ( j - height * 2 / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
+                            + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
                         if ( ( i + l ) < ( width - 1 ) )
                         {

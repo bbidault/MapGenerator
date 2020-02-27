@@ -9,15 +9,15 @@ find_package( OpenCV REQUIRED )
 add_executable( MapGenerator 
                 include/world_map.h 
                 include/pixel.h
+                include/common.h
                 src/main.cpp 
                 src/world_map.cpp
-                libs/common.h
-                libs/common.cpp
-                libs/topography.cpp
-                libs/temperature.cpp
-                libs/precipitation.cpp
-                libs/freshwater.cpp
-                libs/biome.cpp )
+                src/common.cpp
+                src/topography.cpp
+                src/temperature.cpp
+                src/precipitation.cpp
+                src/freshwater.cpp
+                src/biome.cpp )
 
 target_link_libraries( MapGenerator 
                        ${OpenCV_LIBS} )
@@ -25,5 +25,4 @@ target_link_libraries( MapGenerator
 target_include_directories( MapGenerator 
                             PRIVATE 
                             include
-                            src
-                            libs )
+                            src )

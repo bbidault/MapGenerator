@@ -9,8 +9,5 @@
 bool between( double aX,
               double aA,
               double aB );
-int abs( int aA );
-int pow( int aX,
-         int aY );
 
 #endif // COMMON_H

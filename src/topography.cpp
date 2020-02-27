@@ -48,7 +48,7 @@ void WorldMap::randomizeAltitude( int aProb )
 
             if ( k == 0 )
             {
-                world[i][j].altitude = pow( 2, l );
+                world[i][j].altitude = std::pow( 2, l );
             }
         }
     }

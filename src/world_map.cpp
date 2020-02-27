@@ -1,5 +1,4 @@
 #include "world_map.h"
-#include "common.h"
 
 /**
  * @brief display topographic, temperature and precipitation maps

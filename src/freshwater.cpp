@@ -137,7 +137,7 @@ void WorldMap::generateRiver( int i, int j )
     {
         for ( int l = 0; l < 3; l++ )
         {
-            if ( ( abs( k - 1 ) == 1 ) && ( abs( l - 1 ) == 1 ) )
+            if ( ( std::abs( k - 1 ) == 1 ) && ( std::abs( l - 1 ) == 1 ) )
             {
                 if ( SQRT_2 * world[i + k - 1][j + l - 1].altitude < lowest )
                 {
