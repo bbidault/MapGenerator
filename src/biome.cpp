@@ -131,123 +131,83 @@ void WorldMap::colorBiome( bool aRealist )
         {
             if ( world[i][j].biome == POLAR_DESERT )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 255 : 185;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 255 : 185;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 255 : 185;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::PolarDesert : biomeColors::PolarDesertRealist;
             }
             else if ( world[i][j].state == SEA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 50 : 216;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 10 : 171;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 11 : 113;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::Sea : biomeColors::SeaRealist;
             }
             else if ( world[i][j].state == LAKE )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 50 : 171;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 10 : 120;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 11 : 9;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::Lake : biomeColors::LakeRealist;
             }
             else if ( world[i][j].biome == ALPINE_TUNDRA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 235 : 215;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 240 : 182;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 240 : 158;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::AlpineTundra : biomeColors::AlpineTundraRealist;
             }
             else if ( world[i][j].biome == TUNDRA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 140 : 195;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 173 : 209;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 189 : 150;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::Tundra : biomeColors::TundraRealist;
             }
             else if ( world[i][j].biome == DRY_STEPPE )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 65 : 61;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 99 : 122;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 112 : 146;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::DrySteppe : biomeColors::DrySteppeRealist;
             }
             else if ( world[i][j].biome == TEMPERATE_STEPPE )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 29 : 100;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 86 : 234;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 71 : 246;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::TemperateSteppe : biomeColors::TemperateSteppeRealist;
             }
             else if ( world[i][j].biome == TAIGA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 11 : 89;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 49 : 98;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 37 : 0;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::Taiga : biomeColors::TaigaRealist;
             }
             else if ( world[i][j].biome == CHAPPARALS )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 89 : 144;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 133 : 107;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 157 : 134;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::Chapparals : biomeColors::ChapparalsRealist;
             }
             else if ( world[i][j].biome == TEMPERATE_FOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 11 : 82;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 74 : 220;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 48 : 155;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::TemperateForest : biomeColors::TemperateForestRealist;
             }
             else if ( world[i][j].biome == MONTANE_FOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 10 : 142;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 38 : 141;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 22 : 50;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::MontaneForest : biomeColors::MontaneForestRealist;
             }
             else if ( world[i][j].biome == SUBTROPICAL_RAINFOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 13 : 9;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 84 : 115;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 57 : 9;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::SubtropicalRainForest : biomeColors::SubtropicalRainForestRealist;
             }
             else if ( world[i][j].biome == ARID_DESERT )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 175 : 50;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 229 : 77;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 254 : 139;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::AridDesert : biomeColors::AridDesertRealist;
             }
             else if ( world[i][j].biome == XERIC_SHRUBLAND )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 121 : 72;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 168 : 106;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 212 : 178;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::XericShrubland : biomeColors::XericShrublandRealist;
             }
             else if ( world[i][j].biome == SEMIARID_DESERT )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 141 : 125;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 190 : 177;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 246 : 218;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::SemiAridDesert : biomeColors::SemiAridDesertRealist;
             }
             else if ( world[i][j].biome == GRASS_SAVANNA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 46 : 73;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 117 : 195;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 101 : 199;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::GrassSavanna : biomeColors::GrassSavannaRealist;
             }
             else if ( world[i][j].biome == TREE_SAVANNA )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 14 : 19;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 88 : 158;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 62 : 164;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::TreeSavanna : biomeColors::TreeSavannaRealist;
             }
             else if ( world[i][j].biome == SUBTROPICAL_DRY_FOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 29 : 43;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 76 : 132;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 73 : 107;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::SubtropicalDryForest : biomeColors::SubtropicalDryForestRealist;
             }
             else if ( world[i][j].biome == MONSOON_FOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 47 : 100;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 119 : 139;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 106 : 100;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::MontaneForest : biomeColors::MontaneForestRealist;
             }
             else if ( world[i][j].biome == TROPICAL_RAINFOREST )
             {
-                world[i][j].biomeColor[0] = ( aRealist ) ? 9 : 0;
-                world[i][j].biomeColor[1] = ( aRealist ) ? 58 : 81;
-                world[i][j].biomeColor[2] = ( aRealist ) ? 38 : 0;
+                world[i][j].biomeColor = ( aRealist ) ? biomeColors::TropicalRainForest : biomeColors::TropicalRainForestRealist;
             }
         }
     }
