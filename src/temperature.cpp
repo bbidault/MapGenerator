@@ -48,9 +48,9 @@ void WorldMap::createTemp()
             // the temperature is effected by the altitude
             if ( world[i][j].altitude >= 0 )
             {
-                world[i][j].q1Temp   -= world[i][j].altitude / 137;
-                world[i][j].q3Temp   -= world[i][j].altitude / 137;
-                world[i][j].q2Q4Temp -= world[i][j].altitude / 137;
+                world[i][j].q1Temp   -= world[i][j].altitude / Constants::MetersPerDegreeDrop_mpd;
+                world[i][j].q3Temp   -= world[i][j].altitude / Constants::MetersPerDegreeDrop_mpd;
+                world[i][j].q2Q4Temp -= world[i][j].altitude / Constants::MetersPerDegreeDrop_mpd;
             }
         }
     }

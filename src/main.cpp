@@ -27,7 +27,7 @@ int main( int argc, char * *argv )
     world.colorPrecipitation();
     world.colorBiome( true );
 
-    for ( int i = 0; i < 3; i++ )
+    for ( int i = 0; i < 5; i++ )
     {
         world.averageBiomeColor();
     }

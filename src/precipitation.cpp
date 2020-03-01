@@ -34,23 +34,23 @@ void WorldMap::createPrecipitation()
                 {
                     for ( int k = 0; k < 18; k++ )
                     {
-                        int l   = 1;
-                        int max = width / 6 - std::abs( ( j * width * 6 ) / ( 6 * height ) - width / 6 )
+                        int cloudDistTVL  = 1;  // distance travelled by the cloud
+                        int rainDropCount = width / 6 - std::abs( ( j * width * 6 ) / ( 6 * height ) - width / 6 )
                             + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
-                        if ( ( i + l ) < ( width - 1 ) )
+                        if ( ( i + cloudDistTVL ) < ( width - 1 ) )
                         {
-                            while ( 400 + k * 200 > world[i + l][j].altitude &&
-                                    l <= max &&
-                                    ( i + l ) < ( width - 1 ) )
+                            while ( 400 + k * 200 > world[i + cloudDistTVL][j].altitude &&
+                                    cloudDistTVL <= rainDropCount &&
+                                    ( i + cloudDistTVL ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += 0.5;
-                                l++;
+                                world[i + cloudDistTVL][j].precipitation += Constants::RainDrop;
+                                cloudDistTVL++;
                             }
 
-                            if ( ( i + l ) < ( width - 1 ) )
+                            if ( ( i + cloudDistTVL ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += ( max - l ) * 0.5;
+                                world[i + cloudDistTVL][j].precipitation += ( rainDropCount - cloudDistTVL ) * Constants::RainDrop;
                             }
                         }
                     }
@@ -60,23 +60,23 @@ void WorldMap::createPrecipitation()
                 {
                     for ( int k = 0; k < 18; k++ )
                     {
-                        int l   = 1;
-                        int max = width / 6 - std::abs( ( ( j - height / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
+                        int cloudDistTVL  = 1;
+                        int rainDropCount = width / 6 - std::abs( ( ( j - height / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
                             + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
-                        if ( ( i - l ) > 0 )
+                        if ( ( i - cloudDistTVL ) > 0 )
                         {
-                            while ( 400 + k * 200 > world[i - l][j].altitude &&
-                                    l <= max &&
-                                    ( i - l ) > 0 )
+                            while ( 400 + k * 200 > world[i - cloudDistTVL][j].altitude &&
+                                    cloudDistTVL <= rainDropCount &&
+                                    ( i - cloudDistTVL ) > 0 )
                             {
-                                world[i - l][j].precipitation += 0.5;
-                                l++;
+                                world[i - cloudDistTVL][j].precipitation += Constants::RainDrop;
+                                cloudDistTVL++;
                             }
 
-                            if ( ( i - l ) > 0 )
+                            if ( ( i - cloudDistTVL ) > 0 )
                             {
-                                world[i - l][j].precipitation += ( max - l ) * 0.5;
+                                world[i - cloudDistTVL][j].precipitation += ( rainDropCount - cloudDistTVL ) * Constants::RainDrop;
                             }
                         }
                     }
@@ -86,23 +86,23 @@ void WorldMap::createPrecipitation()
                 {
                     for ( int k = 0; k < 18; k++ )
                     {
-                        int l   = 1;
-                        int max = width / 6 - std::abs( ( ( j - height * 2 / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
+                        int cloudDistTVL  = 1;
+                        int rainDropCount = width / 6 - std::abs( ( ( j - height * 2 / 3 ) * width * 6 ) / ( 6 * height ) - width / 6 )
                             + width / 5 - std::abs( ( j * width * 2 ) / ( 5 * height ) - width / 5 );
 
-                        if ( ( i + l ) < ( width - 1 ) )
+                        if ( ( i + cloudDistTVL ) < ( width - 1 ) )
                         {
-                            while ( 400 + k * 200 > world[i + l][j].altitude &&
-                                    l <= max &&
-                                    ( i + l ) < ( width - 1 ) )
+                            while ( 400 + k * 200 > world[i + cloudDistTVL][j].altitude &&
+                                    cloudDistTVL <= rainDropCount &&
+                                    ( i + cloudDistTVL ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += 0.5;
-                                l++;
+                                world[i + cloudDistTVL][j].precipitation += Constants::RainDrop;
+                                cloudDistTVL++;
                             }
 
-                            if ( ( i + l ) < ( width - 1 ) )
+                            if ( ( i + cloudDistTVL ) < ( width - 1 ) )
                             {
-                                world[i + l][j].precipitation += ( max - l ) * 0.5;
+                                world[i + cloudDistTVL][j].precipitation += ( rainDropCount - cloudDistTVL ) * Constants::RainDrop;
                             }
                         }
                     }

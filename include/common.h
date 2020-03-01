@@ -11,6 +11,13 @@ bool between( double aX,
               double aA,
               double aB );
 
+namespace Constants
+{
+    const int    MaximumNumberOfRecursiveCalls = 100000;
+    const double RainDrop                      = 0.5;
+    const int    MetersPerDegreeDrop_mpd       = 137;
+}
+
 namespace TopographyColors
 {
     const cv::Vec3b Altitude0  = { 171, 120, 9 };

@@ -58,7 +58,7 @@ class WorldMap
         void setSeasLakesLands();
         void visitSea( int i,
                        int j,
-                       int k );
+                       int aVisitedPixels );
         void setLakesLands();
         void createSources();
         void generateRiver( int i,
@@ -67,9 +67,9 @@ class WorldMap
                             int j );
         void generateLake( int i,
                            int j );
-        void visitLake( int                             i,
-                        int                             j,
-                        std::vector<PixelCoordinates_T> &aLake );
+        void createVectorOfLakes( int                             i,
+                                  int                             j,
+                                  std::vector<PixelCoordinates_T> &aLake );
 
         // Temperature map functions
         void createTemp();
