@@ -6,7 +6,7 @@
  * @param aLowMargin low margin
  * @param aHighMargin high margin
  */
-bool between( double aX, double aLowMargin, double aHighMargin )
+bool between( float aX, float aLowMargin, float aHighMargin )
 {
     if ( ( aX >= aLowMargin ) && ( aX < aHighMargin ) )
     {

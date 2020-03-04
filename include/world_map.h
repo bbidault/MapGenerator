@@ -55,21 +55,29 @@ class WorldMap
         void colorTopography();
 
         // Fresh water functions
-        void setSeasLakesLands();
+        void setSeasAndLands();
         void visitSea( int i,
                        int j,
                        int aVisitedPixels );
-        void setLakesLands();
+        void setLands();
         void createSources();
-        void generateRiver( int i,
-                            int j );
+        void generateRiver( int   i,
+                            int   j,
+                            float aWaterLeft );
         void setConnection( int i,
                             int j );
-        void generateLake( int i,
-                           int j );
+        void generateLake( int   i,
+                           int   j,
+                           float aWaterLeft );
         void createVectorOfLakes( int                             i,
                                   int                             j,
                                   std::vector<PixelCoordinates_T> &aLake );
+        void findRiverLowestEnd( int   i,
+                                 int   j,
+                                 float aWaterLeft );
+        void createVectorOfRivers( int                             i,
+                                   int                             j,
+                                   std::vector<PixelCoordinates_T> &aDrainageSystem );
 
         // Temperature map functions
         void createTemp();

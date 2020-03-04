@@ -227,7 +227,7 @@ void WorldMap::averageBiomeColor()
                 world[i][j].biomeColor[0] = world[i][j].biomeColor[0] * 2;
                 world[i][j].biomeColor[1] = world[i][j].biomeColor[1] * 2;
                 world[i][j].biomeColor[2] = world[i][j].biomeColor[2] * 2;
-                double denominator = 2;
+                float denominator = 2.0F;
 
                 if ( ( world[i - 1][j - 1].state != LAKE ) && ( world[i - 1][j - 1].state != SEA ) )
                 {
@@ -277,7 +277,7 @@ void WorldMap::averageBiomeColor()
                 world[i][j].biomeColor[0] = world[i][j].biomeColor[0] * 2;
                 world[i][j].biomeColor[1] = world[i][j].biomeColor[1] * 2;
                 world[i][j].biomeColor[2] = world[i][j].biomeColor[2] * 2;
-                double denominator = 2;
+                float denominator = 2.0F;
 
                 if ( ( world[i + 1][j + 1].state != LAKE ) && ( world[i + 1][j + 1].state != SEA ) )
                 {

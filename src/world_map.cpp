@@ -53,10 +53,10 @@ void WorldMap::displayMap()
  */
 void WorldMap::findMax()
 {
-    double maxAltitude      = 0;
-    double minTemp          = 1000;
-    double maxTemp          = -1000;
-    double maxPrecipitation = 0;
+    float maxAltitude      = 0.0F;
+    float minTemp          = 1000.0F;
+    float maxTemp          = -1000.0F;
+    float maxPrecipitation = 0.0F;
 
     for ( int i = 0; i < width; i++ )
     {

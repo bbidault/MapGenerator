@@ -2,9 +2,9 @@
 #include "common.h"
 
 /**
- * @brief initializes seas, lakes and lands status
+ * @brief initializes seas and lands status
  */
-void WorldMap::setSeasLakesLands()
+void WorldMap::setSeasAndLands()
 {
     this->visitSea( 0, 0, 0 );
 
@@ -23,7 +23,15 @@ void WorldMap::setSeasLakesLands()
         }
     }
 
-    this->setLakesLands();
+    for ( int i = 0; i < width; i++ )
+    {
+        for ( int j = 0; j < height; j++ )
+        {
+            world[i][j].pixelVisited = false;
+        }
+    }
+
+    this->setLands();
 }
 
 /**
@@ -75,19 +83,15 @@ void WorldMap::visitSea( int i, int j, int aVisitedPixels )
 }
 
 /**
- * @brief set lake and land status
+ * @brief set land status
  */
-void WorldMap::setLakesLands()
+void WorldMap::setLands()
 {
     for ( int i = 0; i < width; i++ )
     {
         for ( int j = 0; j < height; j++ )
         {
-            if ( ( world[i][j].altitude < 0 ) && ( world[i][j].state == NO_STATE ) )
-            {
-                world[i][j].state = LAKE;
-            }
-            else if ( world[i][j].state == NO_STATE )
+            if ( world[i][j].state == NO_STATE )
             {
                 world[i][j].state = LAND;
             }
@@ -114,7 +118,7 @@ void WorldMap::createSources()
                 if ( sourceProbability == 0 )
                 {
                     world[i][j].state = RIVER;
-                    this->generateRiver( i, j );
+                    this->generateRiver( i, j, Constants::sourceFlow );
                 }
             }
         }
@@ -126,34 +130,41 @@ void WorldMap::createSources()
  *
  * @param i latitude of the source
  * @param j longitude of the source
+ * @param aWaterLeft the water left in the river
  */
-void WorldMap::generateRiver( int i, int j )
+void WorldMap::generateRiver( int i, int j, float aWaterLeft )
 {
-    double lowest = world[i][j].altitude;
+    aWaterLeft--;
+    if ( aWaterLeft <= 0 )
+    {
+        return;
+    }
+
+    float lowestAltitude = world[i][j].altitude;
     // the position of the river flow destination
     int row = i;
     int col = j;
 
-    for ( int k = 0; k < 3; k++ )
+    for ( int k = -1; k <= 1; k++ )
     {
-        for ( int l = 0; l < 3; l++ )
+        for ( int l = -1; l <= 1; l++ )
         {
-            if ( ( std::abs( k - 1 ) == 1 ) && ( std::abs( l - 1 ) == 1 ) )
+            if ( ( std::abs( k ) == 1 ) && ( std::abs( l ) == 1 ) )
             {
-                if ( SQRT_2 * world[i + k - 1][j + l - 1].altitude < lowest )
+                if ( SQRT_2 * world[i + k][j + l].altitude < lowestAltitude )
                 {
-                    lowest = world[i + k - 1][j + l - 1].altitude;
-                    row    = i + k - 1;
-                    col    = j + l - 1;
+                    lowestAltitude = world[i + k][j + l].altitude;
+                    row            = i + k;
+                    col            = j + l;
                 }
             }
             else
             {
-                if ( world[i + k - 1][j + l - 1].altitude < lowest )
+                if ( world[i + k][j + l].altitude < lowestAltitude )
                 {
-                    lowest = world[i + k - 1][j + l - 1].altitude;
-                    row    = i + k - 1;
-                    col    = j + l - 1;
+                    lowestAltitude = world[i + k][j + l].altitude;
+                    row            = i + k;
+                    col            = j + l;
                 }
             }
         }
@@ -168,12 +179,16 @@ void WorldMap::generateRiver( int i, int j )
               ( world[row][col].state == LAKE ) )
     {
         world[row][col].state = LAKE;
-        this->generateLake( row, col );
+        this->generateLake( row, col, aWaterLeft );
+    }
+    else if ( world[row][col].state == RIVER )
+    {
+        this->findRiverLowestEnd( row, col, aWaterLeft );
     }
     else
     {
         world[row][col].state = RIVER;
-        this->generateRiver( row, col );
+        this->generateRiver( row, col, aWaterLeft );
     }
 }
 
@@ -205,15 +220,16 @@ void WorldMap::setConnection( int i, int j )
  *
  * @param i latitude of the source
  * @param j longitude of the source
+ * @param aWaterLeft the water left in the river
  */
-void WorldMap::generateLake( int i, int j )
+void WorldMap::generateLake( int i, int j, float aWaterLeft )
 {
-    bool   buildingLake = true;
-    double lowest       = 10000;
+    bool  buildingLake   = true;
+    float lowestAltitude = 10000.0F;
 
     // sub-lake studied
-    int col = i;
-    int row = j;
+    int row = i;
+    int col = j;
 
     // next addition to the total lake
     int nextRow = i;
@@ -227,14 +243,6 @@ void WorldMap::generateLake( int i, int j )
     newLake.col = j;
     currentLake.push_back( newLake );
 
-    for ( int i = 0; i < width; i++ )
-    {
-        for ( int j = 0; j < height; j++ )
-        {
-            world[i][j].pixelVisited = false;
-        }
-    }
-
     if ( world[i][j].state == LAKE )
     {
         this->createVectorOfLakes( i, j, currentLake );
@@ -242,7 +250,13 @@ void WorldMap::generateLake( int i, int j )
 
     while ( buildingLake )
     {
-        lowest = 10000;
+        aWaterLeft--;
+        if ( aWaterLeft <= 0 )
+        {
+            return;
+        }
+
+        lowestAltitude = 10000.0F;
 
         // for each sub-lake
         for ( int k = 0; k < currentLake.size(); k++ )
@@ -256,16 +270,16 @@ void WorldMap::generateLake( int i, int j )
                  ( world[row + 1][col].state != RIVER ) )
             {
                 world[row + 1][col].state = RIVER;
-                this->generateRiver( row + 1, col );
+                this->generateRiver( row + 1, col, aWaterLeft );
                 buildingLake = false;
                 break;
             }
-            else if ( ( world[row + 1][col].altitude < lowest ) &&
+            else if ( ( world[row + 1][col].altitude < lowestAltitude ) &&
                       ( world[row + 1][col].state != LAKE ) )
             {
-                lowest  = world[row + 1][col].altitude;
-                nextRow = row + 1;
-                nextCol = col;
+                lowestAltitude = world[row + 1][col].altitude;
+                nextRow        = row + 1;
+                nextCol        = col;
             }
 
             if ( ( world[row - 1][col].altitude < world[row][col].altitude ) &&
@@ -273,16 +287,16 @@ void WorldMap::generateLake( int i, int j )
                  ( world[row - 1][col].state != RIVER ) )
             {
                 world[row - 1][col].state = RIVER;
-                this->generateRiver( row - 1, col );
+                this->generateRiver( row - 1, col, aWaterLeft );
                 buildingLake = false;
                 break;
             }
-            else if ( ( world[row - 1][col].altitude < lowest ) &&
+            else if ( ( world[row - 1][col].altitude < lowestAltitude ) &&
                       ( world[row - 1][col].state != LAKE ) )
             {
-                lowest  = world[row - 1][col].altitude;
-                nextRow = row - 1;
-                nextCol = col;
+                lowestAltitude = world[row - 1][col].altitude;
+                nextRow        = row - 1;
+                nextCol        = col;
             }
 
             if ( ( world[row][col + 1].altitude < world[row][col].altitude ) &&
@@ -290,16 +304,16 @@ void WorldMap::generateLake( int i, int j )
                  ( world[row][col + 1].state != RIVER ) )
             {
                 world[row][col + 1].state = RIVER;
-                this->generateRiver( row, col + 1 );
+                this->generateRiver( row, col + 1, aWaterLeft );
                 buildingLake = false;
                 break;
             }
-            else if ( ( world[row][col + 1].altitude < lowest ) &&
+            else if ( ( world[row][col + 1].altitude < lowestAltitude ) &&
                       ( world[row][col + 1].state != LAKE ) )
             {
-                lowest  = world[row][col + 1].altitude;
-                nextRow = row;
-                nextCol = col + 1;
+                lowestAltitude = world[row][col + 1].altitude;
+                nextRow        = row;
+                nextCol        = col + 1;
             }
 
             if ( ( world[row][col - 1].altitude < world[row][col].altitude ) &&
@@ -307,16 +321,16 @@ void WorldMap::generateLake( int i, int j )
                  ( world[row][col - 1].state != RIVER ) )
             {
                 world[row][col - 1].state = RIVER;
-                this->generateRiver( row, col - 1 );
+                this->generateRiver( row, col - 1, aWaterLeft );
                 buildingLake = false;
                 break;
             }
-            else if ( ( world[row][col - 1].altitude < lowest ) &&
+            else if ( ( world[row][col - 1].altitude < lowestAltitude ) &&
                       ( world[row][col - 1].state != LAKE ) )
             {
-                lowest  = world[row][col - 1].altitude;
-                nextRow = row;
-                nextCol = col - 1;
+                lowestAltitude = world[row][col - 1].altitude;
+                nextRow        = row;
+                nextCol        = col - 1;
             }
         }
 
@@ -326,6 +340,14 @@ void WorldMap::generateLake( int i, int j )
             newLake.row                   = nextRow;
             newLake.col                   = nextCol;
             currentLake.push_back( newLake );
+        }
+    }
+
+    for ( int i = 0; i < width; i++ )
+    {
+        for ( int j = 0; j < height; j++ )
+        {
+            world[i][j].pixelVisited = false;
         }
     }
 }
@@ -369,5 +391,82 @@ void WorldMap::createVectorOfLakes( int i, int j, std::vector<PixelCoordinates_T
         newLake.col = j - 1;
         aLake.push_back( newLake );
         this->createVectorOfLakes( i, j - 1, aLake );
+    }
+}
+
+/**
+ * @brief find lowest end of a drainage system and generate the leftover river from there
+ *
+ * @param i latitude of the river
+ * @param j longitude of the river
+ * @param aWaterLeft the water left in the river
+ */
+void WorldMap::findRiverLowestEnd( int i, int j, float aWaterLeft )
+{
+    // total rivers and lakes
+    std::vector<PixelCoordinates_T> drainageSystem;
+
+    PixelCoordinates_T river;
+    river.row = i;
+    river.col = j;
+    drainageSystem.push_back( river );
+
+    this->createVectorOfRivers( i, j, drainageSystem );
+
+    float lowestAltitude = 10000.0F;
+    int   row;
+    int   col;
+    int   futureRiverRow;
+    int   futureRiverCol;
+
+    for ( int i = 0; i < drainageSystem.size(); i++ )
+    {
+        row = drainageSystem[i].row;
+        col = drainageSystem[i].col;
+        if ( ( world[row][col].state == RIVER ) && ( world[row][col].altitude < lowestAltitude ) )
+        {
+            lowestAltitude = world[row][col].altitude;
+            futureRiverRow = row;
+            futureRiverCol = col;
+        }
+    }
+
+    for ( int i = 0; i < width; i++ )
+    {
+        for ( int j = 0; j < height; j++ )
+        {
+            world[i][j].pixelVisited = false;
+        }
+    }
+
+    this->generateRiver( futureRiverRow, futureRiverCol, aWaterLeft );
+}
+
+/**
+ * @brief create a vector listing all the pixels of a lake
+ *
+ * @param i latitude of the river or lake
+ * @param j longitude of the river or lake
+ * @param aDrainageSystem total drainage system
+ */
+void WorldMap::createVectorOfRivers( int i, int j, std::vector<PixelCoordinates_T> &aDrainageSystem )
+{
+    world[i][j].pixelVisited = true;
+    PixelCoordinates_T newRiver;
+
+    for ( int k = -1; k <= 1; k++ )
+    {
+        for ( int l = -1; l <= 1; l++ )
+        {
+            if ( ( ( world[i + k][j + l].state == LAKE ) ||
+                   ( world[i + k][j + l].state == RIVER ) ) &&
+                 !world[i + k][j + l].pixelVisited )
+            {
+                newRiver.row = i + k;
+                newRiver.col = j + l;
+                aDrainageSystem.push_back( newRiver );
+                this->createVectorOfRivers( i + k, j + l, aDrainageSystem );
+            }
+        }
     }
 }
