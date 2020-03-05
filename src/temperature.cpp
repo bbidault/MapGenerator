@@ -57,7 +57,7 @@ void WorldMap::createTemp()
 
     for ( int i = 0; i < 30; i++ )
     {
-        this->averageTemperature();
+        averageTemperature();
     }
 }
 

@@ -6,28 +6,28 @@
  */
 void WorldMap::createTopography()
 {
-    this->randomizeAltitude( 1800 );
+    randomizeAltitude( 1800 );
 
     for ( int i = 0; i < 40; i++ )
     {
-        this->dilation();
+        dilation();
     }
 
     for ( int i = 0; i < 40; i++ )
     {
-        this->erosion();
+        erosion();
     }
 
     for ( int i = 0; i < 30; i++ )
     {
-        this->averageAltitude();
+        averageAltitude();
     }
 
-    this->createIrregularities( 10, 10 );
+    createIrregularities( 10, 10 );
 
-    this->averageAltitude();
+    averageAltitude();
 
-    this->setSeasAndLands();
+    setSeasAndLands();
 }
 
 /**
@@ -73,35 +73,35 @@ void WorldMap::dilation()
             {
                 worldCopy[i][j].altitude = world[i][j].altitude;
 
-                if ( !between( world[i + 1][j].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i + 1][j].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i + 1][j].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i - 1][j].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i - 1][j].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i - 1][j].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i][j + 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i][j + 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i][j + 1].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i][j - 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i][j - 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i][j - 1].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i + 1][j + 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i + 1][j + 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i + 1][j + 1].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i - 1][j - 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i - 1][j - 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i - 1][j - 1].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i - 1][j + 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i - 1][j + 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i - 1][j + 1].altitude = world[i][j].altitude;
                 }
-                if ( !between( world[i + 1][j - 1].altitude, 0, world[i][j].altitude ) )
+                if ( false == between( world[i + 1][j - 1].altitude, 0, world[i][j].altitude ) )
                 {
                     worldCopy[i + 1][j - 1].altitude = world[i][j].altitude;
                 }

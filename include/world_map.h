@@ -56,27 +56,27 @@ class WorldMap
 
         // Fresh water functions
         void setSeasAndLands();
-        void visitSea( int i,
-                       int j,
+        void visitSea( int aRow,
+                       int aCol,
                        int aVisitedPixels );
         void setLands();
         void createSources();
-        void generateRiver( int   i,
-                            int   j,
+        void generateRiver( int   aRow,
+                            int   aCol,
                             float aWaterLeft );
-        void setConnection( int i,
-                            int j );
-        void generateLake( int   i,
-                           int   j,
+        void setConnection( int aRow,
+                            int aCol );
+        void generateLake( int   aRow,
+                           int   aCol,
                            float aWaterLeft );
-        void createVectorOfLakes( int                             i,
-                                  int                             j,
+        void createVectorOfLakes( int                             aRow,
+                                  int                             aCol,
                                   std::vector<PixelCoordinates_T> &aLake );
-        void findRiverLowestEnd( int   i,
-                                 int   j,
+        void findRiverLowestEnd( int   aRow,
+                                 int   aCol,
                                  float aWaterLeft );
-        void createVectorOfRivers( int                             i,
-                                   int                             j,
+        void createVectorOfRivers( int                             aRow,
+                                   int                             aCol,
                                    std::vector<PixelCoordinates_T> &aDrainageSystem );
 
         // Temperature map functions

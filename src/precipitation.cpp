@@ -117,7 +117,7 @@ void WorldMap::createPrecipitation()
 
     for ( int i = 0; i < 30; i++ )
     {
-        this->averagePrecipitation();
+        averagePrecipitation();
     }
 }
 
