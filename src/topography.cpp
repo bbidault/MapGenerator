@@ -230,9 +230,34 @@ void WorldMap::colorTopography()
                 world[i][j].topographyColor = TopographyColors::CoastLakeRiver;
             }
             else if ( ( world[i][j].state == LAND ) &&
-                      ( world[i][j].altitude < 0 ) )
+                      ( world[i][j].altitude < -1000 ) )
             {
-                world[i][j].topographyColor = TopographyColors::Depression;
+                world[i][j].topographyColor = TopographyColors::Depression0;
+            }
+            else if ( ( world[i][j].state == LAND ) &&
+                      ( between( world[i][j].altitude, -1000, -800 ) ) )
+            {
+                world[i][j].topographyColor = TopographyColors::Depression1;
+            }
+            else if ( ( world[i][j].state == LAND ) &&
+                      ( between( world[i][j].altitude, -800, -600 ) ) )
+            {
+                world[i][j].topographyColor = TopographyColors::Depression2;
+            }
+            else if ( ( world[i][j].state == LAND ) &&
+                      ( between( world[i][j].altitude, -600, -400 ) ) )
+            {
+                world[i][j].topographyColor = TopographyColors::Depression3;
+            }
+            else if ( ( world[i][j].state == LAND ) &&
+                      ( between( world[i][j].altitude, -400, -200 ) ) )
+            {
+                world[i][j].topographyColor = TopographyColors::Depression4;
+            }
+            else if ( ( world[i][j].state == LAND ) &&
+                      ( between( world[i][j].altitude, -200, 0 ) ) )
+            {
+                world[i][j].topographyColor = TopographyColors::Depression5;
             }
             else if ( world[i][j].altitude < -1800 )
             {

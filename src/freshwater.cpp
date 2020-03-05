@@ -93,6 +93,10 @@ void WorldMap::setLands()
         {
             if ( world[i][j].state == NO_STATE )
             {
+                if ( world[i][j].altitude < 0 )
+                {
+                    world[i][j].altitude = world[i][j].altitude / 2.0F;
+                }
                 world[i][j].state = LAND;
             }
         }
@@ -151,11 +155,23 @@ void WorldMap::generateRiver( int i, int j, float aWaterLeft )
         {
             if ( ( std::abs( k ) == 1 ) && ( std::abs( l ) == 1 ) )
             {
-                if ( SQRT_2 * world[i + k][j + l].altitude < lowestAltitude )
+                if ( world[i + k][j + l].altitude < 0 )
                 {
-                    lowestAltitude = world[i + k][j + l].altitude;
-                    row            = i + k;
-                    col            = j + l;
+                    if ( ( world[i + k][j + l].altitude / SQRT_2 ) < lowestAltitude )
+                    {
+                        lowestAltitude = world[i + k][j + l].altitude;
+                        row            = i + k;
+                        col            = j + l;
+                    }
+                }
+                else
+                {
+                    if ( SQRT_2 * world[i + k][j + l].altitude < lowestAltitude )
+                    {
+                        lowestAltitude = world[i + k][j + l].altitude;
+                        row            = i + k;
+                        col            = j + l;
+                    }
                 }
             }
             else

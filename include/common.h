@@ -22,7 +22,6 @@ namespace Constants
 namespace TopographyColors
 {
     const cv::Vec3b CoastLakeRiver    = { 171, 120, 9 };
-    const cv::Vec3b Depression        = { 210, 223, 167 };
     const cv::Vec3b NegativeAltitude0 = { 216, 171, 113 };
     const cv::Vec3b NegativeAltitude1 = { 222, 178, 121 };
     const cv::Vec3b NegativeAltitude2 = { 227, 185, 132 };
@@ -33,6 +32,12 @@ namespace TopographyColors
     const cv::Vec3b NegativeAltitude7 = { 255, 227, 185 };
     const cv::Vec3b NegativeAltitude8 = { 255, 236, 198 };
     const cv::Vec3b NegativeAltitude9 = { 254, 242, 216 };
+    const cv::Vec3b Depression0       = { 160, 153, 117 };
+    const cv::Vec3b Depression1       = { 170, 163, 127 };
+    const cv::Vec3b Depression2       = { 180, 173, 137 };
+    const cv::Vec3b Depression3       = { 190, 183, 147 };
+    const cv::Vec3b Depression4       = { 200, 213, 157 };
+    const cv::Vec3b Depression5       = { 210, 223, 167 };
     const cv::Vec3b Altitude0         = { 165, 208, 172 };
     const cv::Vec3b Altitude1         = { 139, 191, 148 };
     const cv::Vec3b Altitude2         = { 143, 198, 168 };
